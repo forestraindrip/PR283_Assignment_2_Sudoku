@@ -5,8 +5,49 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PR283_Assignment_2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Width="660" Height="600">
+
+    <Grid x:Name="MainGrid" Margin="10" >
+        <StackPanel Height="74" Margin="0" VerticalAlignment="Bottom" Orientation="Horizontal">
+            <Button Content="Button1" Width="50" Margin="10" Height="50" Click="Button_Click_1"/>
+            <Button Content="Button2" Width="50" Height="50" Margin="10"/>
+            <Button Content="Button3" Height="50" Margin="10" Width="50"/>
+            <Button Content="Button4" Width="50" Margin="10" Height="50"/>
+            <Button Content="Button5" Width="50" Margin="10" Height="50"/>
+            <Button Content="Button6" Width="50" Margin="10" Height="50"/>
+            <Button Content="Button7" Width="50" Margin="10" Height="50"/>
+            <Button Content="Button8" Width="50" Margin="10" Height="50"/>
+            <Button Content="Button9" Width="50" Margin="10" Height="50"/>
+        </StackPanel>
+        <Grid Height="404" Margin="35,77,21.6,69.4" Width="577">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.16*"/>
+                <ColumnDefinition Width="0.16*"/>
+                <ColumnDefinition Width="0.16*"/>
+                <ColumnDefinition Width="0.16*"/>
+                <ColumnDefinition Width="0.16*"/>
+                <ColumnDefinition Width="0.16*"/>
+                <ColumnDefinition Width="0.16*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.16*"></RowDefinition>
+                <RowDefinition Height="0.16*"></RowDefinition>
+                <RowDefinition Height="0.16*"></RowDefinition>
+                <RowDefinition Height="0.16*"></RowDefinition>
+                <RowDefinition Height="0.16*"></RowDefinition>
+                <RowDefinition Height="0.16*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Content="Button" Margin="0"/>
+            <Button Content="Button" Grid.Column="1" Margin="0"/>
+            <Button Content="Button" Grid.Column="2" Margin="3.4,7,0,0" Width="43" Height="41"/>
+            <Button Content="Button" Grid.Column="3" Margin="10.8,12,0,0" Width="64" Height="40"/>
+            <Button Content="Button" Grid.Column="4" Margin="23.4,18,0,0" Width="47"/>
+            <Button Content="Button" Grid.Column="5" Margin="14,18,0,0" Width="64" Height="40"/>
+            <Button Content="Button" Grid.Column="6" Margin="9.8,13,0,0" Width="64" Height="40"/>
+        </Grid>
+        <Menu x:Name="mainMenu" Height="49" Margin="0,0,-0.4,0" VerticalAlignment="Top" HorizontalContentAlignment="Center">
+            <MenuItem Header="Load" Height="50" Width="52" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalContentAlignment="Center"/>
+            <MenuItem Header="Save" Height="46" Width="58" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        </Menu>
     </Grid>
 </Window>
