@@ -20,24 +20,58 @@ namespace PR283_Assignment_2
     /// </summary>
     public partial class MainWindow : Window
     {
+        protected int gridWidth;
+        protected int gridHeight;
+        protected int windowWidth;
+        protected int windowHeight;
+        protected int squareHeight;
+        protected int squareWidth;
+        protected int squaresPerRow;
+        protected int squaresPerColumn;
+        protected Grid myGrid;
+
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Button_Click()
+        // Add buttons dynamically
+        public void AddGridButtons()
         {
-
+            // Create a button
+            // Name the button
+            // Find the cell
+            // Add the button to the cell
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        // Save
+        public void SaveGame() { }
+
+        // Load
+        // Do not override default value
+        public void LoadGmae() { }
+
+        // Show row is completed
+        public void ShowRowIsCompleted() { }
+        // Show column is completed
+        public void ShowColumnIsCompleted() { }
+
+        // Show square is completed
+        public void ShowSquareIsCompleted() { }
+
+        // Show the game is completed
+        public void ShowGameIsCompleted() { }
+
+        public void SetWindowWidth() { }
+
+        public void SetWindowHeight() { }
+
+        public void DefineGridSize(int squaresPerRow, int squaresPerColumn)
         {
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
+            // Define width of column
+            RowDefinition rowDefinition = new RowDefinition();
+            // Define height of row
         }
     }
 }

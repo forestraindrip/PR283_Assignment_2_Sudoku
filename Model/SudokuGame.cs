@@ -13,8 +13,8 @@ namespace MarcusJ
     {
         protected IGrid myGrid;
         protected int maxValue;
-        protected int squareHeight;
-        protected int squareWidth;
+        protected int squaresPerColumn;
+        protected int squaresPerRow;
         protected StreamReader myReader;
         protected StreamWriter myWriter;
         protected string gridCSVString;
@@ -27,9 +27,9 @@ namespace MarcusJ
         {
             SetMaxValue(maxValue);
             SetSquareHeight((int)Math.Sqrt(maxValue));
-            SetSquareWidth(maxValue / squareHeight);
+            SetSquareWidth(maxValue / squaresPerColumn);
 
-            indexGetter = new IndexGetter(maxValue, squareHeight, squareWidth);
+            indexGetter = new IndexGetter(maxValue, squaresPerColumn, squaresPerRow);
             LoadCSVFileToGrid(gridFilePath);
 
             validator = new Validator(maxValue, myGrid);
@@ -58,7 +58,7 @@ namespace MarcusJ
         // Set array values to Grid
         public void Set(int[] cellValues)
         {
-            myGrid = new Grid(maxValue, squareHeight, squareWidth);
+            myGrid = new Grid(maxValue, squaresPerColumn, squaresPerRow);
             for (int index = 0; index < cellValues.Length; index++)
             {
                 int value = cellValues[index];
@@ -68,12 +68,12 @@ namespace MarcusJ
 
         public void SetSquareHeight(int squareHeight)
         {
-            this.squareHeight = squareHeight;
+            this.squaresPerColumn = squareHeight;
         }
 
         public void SetSquareWidth(int squareWidth)
         {
-            this.squareWidth = squareWidth;
+            this.squaresPerRow = squareWidth;
         }
 
         // Convert grid to array 
