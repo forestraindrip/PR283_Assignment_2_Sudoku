@@ -9,10 +9,12 @@
 
     <Grid x:Name="mainGrid" Margin="10" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="262*"/>
-            <RowDefinition Height="287*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="300*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Menu x:Name="mainMenu" Height="49" VerticalAlignment="Top" HorizontalContentAlignment="Center">
+
+        <Menu Grid.Row="0" x:Name="mainMenu" Height="49" VerticalAlignment="Top" HorizontalContentAlignment="Center">
             <MenuItem Header="Load" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalContentAlignment="Center"/>
             <MenuItem Header="Save" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
             <MenuItem Header="Restart" Height="50" Width="60"/>
@@ -21,7 +23,7 @@
                 <ComboBoxItem Content="Traditional Chinese" HorizontalAlignment="Left" Width="60"/>
             </ComboBox>
         </Menu>
-        <Grid Margin="20,80,0,100" Grid.RowSpan="2" Background="#FFEAFCFF" HorizontalAlignment="Left" Width="347">
+        <Grid Grid.Row="1" Margin="20,80,0,100"  Background="#FFEAFCFF" HorizontalAlignment="Left" Width="347">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.16*"/>
                 <ColumnDefinition Width="0.16*"/>
@@ -45,12 +47,12 @@
             <Button Content="Button" Grid.Column="4" Margin="15,13,3,6"/>
             <Button Content="Button" Grid.Column="5" Margin="14,18,6,1"/>
         </Grid>
-        <TextBox Margin="0,80,20,100" TextWrapping="Wrap" Text="TextBox" Grid.RowSpan="2" Background="#FFFFF4CD" HorizontalAlignment="Right" Width="217"/>
-        <StackPanel Height="74" Margin="0" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.Row="1">
+        <TextBox Margin="0,80,20,100" TextWrapping="Wrap" Text="TextBox" Grid.RowSpan="2" Background="#FFFFF8DF" HorizontalAlignment="Right" Width="217"/>
+        <StackPanel Height="70" Margin="0" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.Row="1">
             <Button Content="Button1" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
             <Button Content="Button2" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
             <Button Content="Button3" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button Content="Button4" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
+            <Button Content="Button4" Height="50" Width="50" Margin="10"  Cursor="Hand" MouseDown="Button_MouseDown"/>
             <Button Content="Button5" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
             <Button Content="Button6" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
             <Button Content="Button7" Height="50" Width="50" Margin="10"  Cursor="Hand"/>

@@ -29,6 +29,7 @@ namespace PR283_Assignment_2
         protected int squaresPerRow;
         protected int squaresPerColumn;
         protected Grid myGrid;
+        protected int dragedValue;
 
 
         public MainWindow()
@@ -73,5 +74,23 @@ namespace PR283_Assignment_2
             RowDefinition rowDefinition = new RowDefinition();
             // Define height of row
         }
+
+        public Button CreateGridButton()
+        {
+            // TODO: CreateGridButton
+            return new Button();
+        }
+
+        public void PressButton(object sender, MouseButtonEventArgs e)
+        {
+            if (sender.GetType() == typeof(Button))
+            {
+                Button button = sender as Button;
+                dragedValue = Int32.Parse(button.Content.ToString());
+            }
+        }
+        public void DragButtonOut() { }
+        public void DragButtonIn() { }
+
     }
 }
