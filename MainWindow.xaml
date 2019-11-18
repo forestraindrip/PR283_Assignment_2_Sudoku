@@ -21,10 +21,11 @@
             <MenuItem x:Name="LoadButton" Header="Load" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalContentAlignment="Center" Click="LoadButton_Click"/>
             <MenuItem x:Name="SaveButton" Header="Save" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="SaveButton_Click"/>
             <MenuItem x:Name="RestartButton" Header="Restart" Height="50" Width="60" Click="RestartButton_Click"/>
-            <ComboBox x:Name="LanguageComboBox" Width="113" Height="50" SelectedIndex="0" SelectionChanged="LanguageComboBox_SelectionChanged">
-                <ComboBoxItem x:Name="EnglishLanguageComboBoxItem" Content="English" HorizontalAlignment="Left" Width="112"/>
-                <ComboBoxItem x:Name="TChineseLanguageComboBoxItem" Content="Traditional Chinese" Height="20" HorizontalAlignment="Left" Width="111" Margin="0"/>
+
+            <ComboBox x:Name="LanguageComboBox" Width="113" Height="50" SelectionChanged="SetUILanguage" >
+
             </ComboBox>
+
         </Menu>
         <Grid x:Name="SquareGrid" Grid.Row="1" Margin="12,2.6,0,107.8"  Background="#FFEAFCFF" HorizontalAlignment="Left" Width="360" Height="360">
             <Grid.ColumnDefinitions>

@@ -31,7 +31,9 @@ namespace PR283_Assignment_2
         protected Grid myGrid;
         protected int dragedValue;
         protected string language = "en-US"; // zh-TW
-        protected List<string> languageArray = new List<string>() { "en-US", "zh-TW" };
+
+        protected Dictionary<string, Dictionary<string, string>> languageDictionary = new Dictionary<string, Dictionary<string, string>>();
+
         protected Dictionary<string, string> enUSDictionary = new Dictionary<string, string>()
         {
             { "Load", "Load"},
@@ -52,11 +54,18 @@ namespace PR283_Assignment_2
             { "Nine", "9"},
             { "Zero", "0"},
         };
+
         protected Dictionary<string, string> zhTWDictionary = new Dictionary<string, string>() { };
 
         public MainWindow()
         {
             InitializeComponent();
+
+            // Binding dictionary to combobox
+            languageDictionary.Add("English", enUSDictionary);
+            languageDictionary.Add("Traditional Chinese", zhTWDictionary);
+            LanguageComboBox.ItemsSource = languageDictionary.Keys;
+
             InitialiseUIElements();
         }
 
@@ -73,7 +82,7 @@ namespace PR283_Assignment_2
 
         private void PopulateSqaures()
         {
-           // throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
 
         private void PopulateInputButtons()
@@ -88,7 +97,7 @@ namespace PR283_Assignment_2
 
         private void SetupSquareGridSize()
         {
-           // throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
 
         // TODO: Add buttons dynamically
@@ -168,7 +177,6 @@ namespace PR283_Assignment_2
         {
             ComboBox languageComboBox = (ComboBox)sender;
             // Traditional Chinese
-            languageComboBox;
             SetUILanguage();
         }
 
@@ -177,6 +185,17 @@ namespace PR283_Assignment_2
             // throw new NotImplementedException();
         }
 
+        private void SetUILanguage(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+
+            AddMessageToMessageBoard(comboBox.SelectedItem.ToString());
+        }
+
+        protected void AddMessageToMessageBoard(string message)
+        {
+            MessageTextBox.Text += "\r\n" + message;
+        }
 
 
 
