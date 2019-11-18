@@ -21,14 +21,15 @@
                    Content="{x:Static p:Resources.Score}"  Margin="100,0,0,0" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
         <Menu Grid.Row="0" x:Name="MainMenu" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Center">
-            <MenuItem x:Name="StartButton" Header="Start" Height="50" Width="60" 
+            <Button x:Name="StartButton" Content="Start" Height="50" Width="60" 
 ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Click="StartButton_Click"/>
-            <MenuItem x:Name="LoadButton" Header="{x:Static p:Resources.Load}" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Click="LoadButton_Click"/>
-            <MenuItem x:Name="SaveButton" Header="{x:Static p:Resources.Save}" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="SaveButton_Click"/>
-            <MenuItem x:Name="RestartButton" Header="{x:Static p:Resources.Restart}" Height="50" Width="60" Click="RestartButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button x:Name="LoadButton" Content="{x:Static p:Resources.Load}" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Click="LoadButton_Click"/>
+            <Button x:Name="SaveButton" Content="{x:Static p:Resources.Save}" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="SaveButton_Click"/>
+            <Button x:Name="RestartButton" Content="{x:Static p:Resources.Restart}" Height="50" Width="60" Click="RestartButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-            <ComboBox x:Name="LanguageComboBox" Width="89" Height="50" SelectionChanged="SetUILanguage" SelectedIndex="0" >
-
+            <ComboBox x:Name="LanguageComboBox" Width="120" Height="50" SelectionChanged="ChangeSelectedLanguage" SelectedIndex="-1" >
+                <ComboBoxItem x:Name="EnglishLanguageButton" Width="120" Content="{x:Static p:Resources.English}" HorizontalAlignment="Center" VerticalAlignment="Center" Tag="English"/>
+                <ComboBoxItem x:Name="TraditionalChineseLanguageButton" Width="120" Content="{x:Static p:Resources.TraditionalChinese}" HorizontalAlignment="Center" VerticalAlignment="Center" Tag="TraditionalChinese"/>
             </ComboBox>
 
         </Menu>

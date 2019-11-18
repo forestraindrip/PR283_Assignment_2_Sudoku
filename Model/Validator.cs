@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MarcusJ
 {
-    public class Validator : IValidator
+    public class Validator 
     {
         protected IGrid myGrid;
         protected int maxValue;

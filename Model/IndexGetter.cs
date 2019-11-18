@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MarcusJ
 {
-    public class IndexGetter : IIndexGetter
+    public class IndexGetter
     {
         protected int maxValue;
         protected int squareHeight;

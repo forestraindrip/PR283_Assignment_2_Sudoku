@@ -1,4 +1,5 @@
 ﻿using MarcusJ;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -39,46 +40,38 @@ namespace PR283_Assignment_2
         protected DispatcherTimer dispatcherTimer;
         protected Stopwatch stopwatch;
         protected DateTime startTime;
+        protected List<Button> mySquareButtons = new List<Button>();
 
         protected Dictionary<string, Dictionary<string, string>> languageDictionary = new Dictionary<string, Dictionary<string, string>>();
 
-        protected Dictionary<string, string> enUSDictionary = new Dictionary<string, string>()
+        protected Dictionary<int, string> numberDictionary = new Dictionary<int, string>()
         {
-            { "Load", "Load"},
-            { "Save", "Save"},
-            { "Restart", "Restart"},
-            { "English", "English"},
-            { "Traditional Chinese", "Traditional Chinese"},
-            { "Timer", "Timer"},
-            { "Score", "Score"},
-            { "One", "1"},
-            { "Two", "2"},
-            { "Three", "3"},
-            { "Four", "4"},
-            { "Five", "5"},
-            { "Six", "6"},
-            { "Seven", "7"},
-            { "Eight", "8"},
-            { "Nine", "9"},
-            { "Zero", "0"},
+            {1,"One" },
+            {2, "Two" },
+            {3, "Three"},
+            {4, "Four"},
+            {5, "Five"},
+            {6, "Six"},
+            {7, "Seven"},
+            { 8,"Eight"},
+            { 9,"Nine"},
+            {0, "Zero"},
         };
 
-        protected Dictionary<string, string> zhTWDictionary = new Dictionary<string, string>() { };
+
 
         public MainWindow()
         {
             InitializeComponent();
 
             // Binding dictionary to combobox
-            languageDictionary.Add("English", enUSDictionary);
-            languageDictionary.Add("Traditional Chinese", zhTWDictionary);
-            LanguageComboBox.ItemsSource = languageDictionary.Keys;
+
 
             // Initialise game
             if (maxSquareValue == -1)
             {
                 maxSquareValue = 6;
-                sudokuGame = new SudokuGame(maxSquareValue, "..\\grid6x6.csv", "..\\solution6x6.csv");
+                sudokuGame = new SudokuGame("..\\grid6x6.csv", "..\\solution6x6.csv");
             }
             maxSquareAmount = maxSquareValue * maxSquareValue;
 
@@ -87,6 +80,8 @@ namespace PR283_Assignment_2
             InitialiseUIElements();
 
             // TEST
+
+
         }
 
         public void InitialiseUIElements()
@@ -134,15 +129,21 @@ namespace PR283_Assignment_2
         protected Button CreateGridButton()
         {
             // TODO: CreateGridButton Factory method
-
+            // fubar
             for (int i = 0; i < maxSquareAmount; i++)
             {
                 int cellValue = sudokuGame.GetCell(i);
 
                 Button button = new Button();
                 button.Name = "SquareButton" + string.Format("{0:00}", i);
+                button.CommandParameter = cellValue;
+
+                string temp = Properties.Resources.ResourceManager.GetString("One");
+
                 button.Drop += SquareButtonDrop;
                 button.DragLeave += SquareButtonDragLeave;
+
+                mySquareButtons.Add(button);
             }
 
             return new Button();
@@ -150,7 +151,8 @@ namespace PR283_Assignment_2
 
         private void SquareButtonDragLeave(object sender, DragEventArgs e)
         {
-            throw new NotImplementedException();
+            Button senderBtn = (Button)sender;
+            senderBtn.Tag = 0;
         }
 
         private void SquareButtonDrop(object sender, DragEventArgs e)
@@ -165,8 +167,23 @@ namespace PR283_Assignment_2
         protected void SaveGame() { }
 
         // Load
-        // Do not override default value
-        protected void LoadGame() { }
+        protected void LoadGame()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    var filePath = openFileDialog.FileName;
+                    sudokuGame.LoadCSVFileToGrid(filePath);
+                }
+                catch (Exception e)
+                {
+                    MessageTextBox.Text += e.Message;
+                    throw e;
+                }
+            }
+        }
 
         protected void RestartGame() { }
 
@@ -233,10 +250,13 @@ namespace PR283_Assignment_2
 
         private void SetUILanguage()
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
+            // https://www.tutorialspoint.com/wpf/wpf_localization.htm
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
+
+            //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("zh-TW");
         }
 
-        private void SetUILanguage(object sender, SelectionChangedEventArgs e)
+        private void ChangeSelectedLanguage(object sender, SelectionChangedEventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
 

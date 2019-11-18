@@ -14,7 +14,6 @@
       <HashCode>AAAAAAAAAAAAAQAgAAAAAAAAAAJAAGAAAAAAAAAAAIA=</HashCode>
       <FileName>Model\Validator.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="MarcusJ.IndexGetter">
     <Position X="15.25" Y="2" Width="1.5" />
@@ -22,7 +21,6 @@
       <HashCode>AAACCAAAAAAAAAAAAAAAAAAAAAAQAKAQAAAAAAACAAI=</HashCode>
       <FileName>Model\IndexGetter.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="MarcusJ.Grid">
     <Position X="12" Y="2" Width="2.5" />
@@ -35,7 +33,7 @@
   <Class Name="PR283_Assignment_2.MainWindow">
     <Position X="0.5" Y="2" Width="5.75" />
     <TypeIdentifier>
-      <HashCode>JBACBDAAbAOQASAADgEgAABAIHBAAIGAgoKCREIAnok=</HashCode>
+      <HashCode>JBAChDAAbAOQACAADgEgAABAIHBAAIGAgoCGREIAnok=</HashCode>
       <FileName>MainWindow.xaml.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>

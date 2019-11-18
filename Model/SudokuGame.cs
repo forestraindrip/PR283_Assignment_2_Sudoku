@@ -19,17 +19,12 @@ namespace MarcusJ
         protected StreamWriter myWriter;
         protected string gridCSVString;
         protected int[] solution;
-        protected IIndexGetter indexGetter;
-        protected IValidator validator;
+        protected IndexGetter indexGetter;
+        protected Validator validator;
 
 
-        public SudokuGame(int maxValue, string gridFilePath, string solutionFilePath)
+        public SudokuGame(string gridFilePath, string solutionFilePath)
         {
-            SetMaxValue(maxValue);
-            SetSquareHeight((int)Math.Sqrt(maxValue));
-            SetSquareWidth(maxValue / squaresPerColumn);
-
-            indexGetter = new IndexGetter(maxValue, squaresPerColumn, squaresPerRow);
             LoadCSVFileToGrid(gridFilePath);
 
             validator = new Validator(maxValue, myGrid);
@@ -96,6 +91,11 @@ namespace MarcusJ
         public void FromCSV(string csv)
         {
             int[] intArray = ConvertCSVToArray(csv); // Convert CSV to array
+
+            maxValue = (int)Math.Sqrt(intArray.Length);
+            SetMaxValue(maxValue);
+            SetSquareHeight((int)Math.Sqrt(maxValue));
+            SetSquareWidth(maxValue / squaresPerColumn);
             Set(intArray); // Set values to Grid
         }
 
@@ -121,6 +121,7 @@ namespace MarcusJ
 
         public void SetCell(int value, int gridIndex)
         {
+            indexGetter = new IndexGetter(maxValue, squaresPerColumn, squaresPerRow);
             int columnIndex = indexGetter.GetColumnIndex(gridIndex);
             int rowIndex = indexGetter.GetRowIndex(gridIndex);
             try

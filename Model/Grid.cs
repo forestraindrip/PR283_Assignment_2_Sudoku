@@ -11,7 +11,7 @@ namespace MarcusJ
         protected int squareHeight;
         protected int squareWidth;
         protected int[] myCells;
-        protected IIndexGetter indexGetter;
+        protected IndexGetter indexGetter;
 
         public Grid(int maxValue, int squareHeight, int squareWidth)
         {

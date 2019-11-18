@@ -77,11 +77,9 @@
     <Compile Include="Interface\IGet.cs" />
     <Compile Include="Interface\IGrid.cs" />
     <Compile Include="Interface\IGridFile.cs" />
-    <Compile Include="Interface\IIndexGetter.cs" />
     <Compile Include="Interface\ISerialize.cs" />
     <Compile Include="Interface\ISet.cs" />
     <Compile Include="Interface\ISudokuGame.cs" />
-    <Compile Include="Interface\IValidator.cs" />
     <Compile Include="Interface\IValuesGetter.cs" />
     <Compile Include="IsNotValidValueException.cs" />
     <Compile Include="MainWindow.xaml.cs">
