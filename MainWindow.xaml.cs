@@ -30,14 +30,68 @@ namespace PR283_Assignment_2
         protected int squaresPerColumn;
         protected Grid myGrid;
         protected int dragedValue;
-
+        protected string language = "en-US"; // zh-TW
+        protected List<string> languageArray = new List<string>() { "en-US", "zh-TW" };
+        protected Dictionary<string, string> enUSDictionary = new Dictionary<string, string>()
+        {
+            { "Load", "Load"},
+            { "Save", "Save"},
+            { "Restart", "Restart"},
+            { "English", "English"},
+            { "Traditional Chinese", "Traditional Chinese"},
+            { "Timer", "Timer"},
+            { "Score", "Score"},
+            { "One", "1"},
+            { "Two", "2"},
+            { "Three", "3"},
+            { "Four", "4"},
+            { "Five", "5"},
+            { "Six", "6"},
+            { "Seven", "7"},
+            { "Eight", "8"},
+            { "Nine", "9"},
+            { "Zero", "0"},
+        };
+        protected Dictionary<string, string> zhTWDictionary = new Dictionary<string, string>() { };
 
         public MainWindow()
         {
             InitializeComponent();
+            InitialiseUIElements();
         }
 
-        // Add buttons dynamically
+        public void InitialiseUIElements()
+        {
+            // TODO: InitialiseUIElements
+            SetUILanguage();
+
+            SetupSquareGrid();
+            PopulateInputButtons();
+            PopulateSqaures();
+
+        }
+
+        private void PopulateSqaures()
+        {
+           // throw new NotImplementedException();
+        }
+
+        private void PopulateInputButtons()
+        {
+            // throw new NotImplementedException();
+        }
+
+        private void SetupSquareGrid()
+        {
+            SetupSquareGridSize();
+        }
+
+        private void SetupSquareGridSize()
+        {
+           // throw new NotImplementedException();
+        }
+
+        // TODO: Add buttons dynamically
         public void AddGridButtons()
         {
             // Create a button
@@ -78,6 +132,7 @@ namespace PR283_Assignment_2
         public Button CreateGridButton()
         {
             // TODO: CreateGridButton
+            // TODO: Factory method
             return new Button();
         }
 
@@ -92,5 +147,48 @@ namespace PR283_Assignment_2
         public void DragButtonOut() { }
         public void DragButtonIn() { }
 
+        private void LoadButton_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: Load game
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: Save game
+
+        }
+
+        private void RestartButton_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: Restart game
+        }
+
+
+        private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox languageComboBox = (ComboBox)sender;
+            // Traditional Chinese
+            languageComboBox;
+            SetUILanguage();
+        }
+
+        private void SetUILanguage()
+        {
+            // throw new NotImplementedException();
+        }
+
+
+
+
+
+
+
+
+        // TODO: Timer
+        // TODO: Prompt invalid number message
+        // TODO: Show row is completed
+        // TODO: Show column is completed
+        // TODO: Show square is completed
+        // TODO: Show game complete.
     }
 }

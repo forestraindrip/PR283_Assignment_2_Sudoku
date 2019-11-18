@@ -7,23 +7,26 @@
         mc:Ignorable="d"
         Title="MainWindow" Width="660" Height="600">
 
-    <Grid x:Name="mainGrid" Margin="10" >
+    <Grid x:Name="MainGrid" Margin="10" >
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="300*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <Menu Grid.Row="0" x:Name="mainMenu" Height="49" VerticalAlignment="Top" HorizontalContentAlignment="Center">
-            <MenuItem Header="Load" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalContentAlignment="Center"/>
-            <MenuItem Header="Save" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-            <MenuItem Header="Restart" Height="50" Width="60"/>
-            <ComboBox Width="80" Height="50">
-                <ComboBoxItem Content="English" HorizontalAlignment="Left" Width="60"/>
-                <ComboBoxItem Content="Traditional Chinese" HorizontalAlignment="Left" Width="60"/>
+        <Grid Margin="0,50,0,0" Grid.RowSpan="2" Height="30" VerticalAlignment="Top">
+            <Label x:Name="TimerLabel" HorizontalAlignment="Left" Width="100" Margin="0" Content="Timer"/>
+            <Label x:Name="ScoreLabel" Content="Score" HorizontalAlignment="Left" Margin="100,0,0,0" Width="100"/>
+        </Grid>
+        <Menu Grid.Row="0" x:Name="MainMenu" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Center">
+            <MenuItem x:Name="LoadButton" Header="Load" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalContentAlignment="Center" Click="LoadButton_Click"/>
+            <MenuItem x:Name="SaveButton" Header="Save" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="SaveButton_Click"/>
+            <MenuItem x:Name="RestartButton" Header="Restart" Height="50" Width="60" Click="RestartButton_Click"/>
+            <ComboBox x:Name="LanguageComboBox" Width="113" Height="50" SelectedIndex="0" SelectionChanged="LanguageComboBox_SelectionChanged">
+                <ComboBoxItem x:Name="EnglishLanguageComboBoxItem" Content="English" HorizontalAlignment="Left" Width="112"/>
+                <ComboBoxItem x:Name="TChineseLanguageComboBoxItem" Content="Traditional Chinese" Height="20" HorizontalAlignment="Left" Width="111" Margin="0"/>
             </ComboBox>
         </Menu>
-        <Grid Grid.Row="1" Margin="20,80,0,100"  Background="#FFEAFCFF" HorizontalAlignment="Left" Width="347">
+        <Grid x:Name="SquareGrid" Grid.Row="1" Margin="12,2.6,0,107.8"  Background="#FFEAFCFF" HorizontalAlignment="Left" Width="360" Height="360">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.16*"/>
                 <ColumnDefinition Width="0.16*"/>
@@ -47,17 +50,18 @@
             <Button Content="Button" Grid.Column="4" Margin="15,13,3,6"/>
             <Button Content="Button" Grid.Column="5" Margin="14,18,6,1"/>
         </Grid>
-        <TextBox Margin="0,80,20,100" TextWrapping="Wrap" Text="TextBox" Grid.RowSpan="2" Background="#FFFFF8DF" HorizontalAlignment="Right" Width="217"/>
-        <StackPanel Height="70" Margin="0" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.Row="1">
-            <Button Content="Button1" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button Content="Button2" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button Content="Button3" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button Content="Button4" Height="50" Width="50" Margin="10"  Cursor="Hand" MouseDown="Button_MouseDown"/>
-            <Button Content="Button5" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button Content="Button6" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button Content="Button7" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button Content="Button8" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button Content="Button9" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
+        <TextBox x:Name="MessageTextBox" Margin="0,1.6,19.6,109.8" TextWrapping="Wrap" Text="TextBox" Background="#FFFFF8DF" HorizontalAlignment="Right" Width="217" Grid.Row="1" IsReadOnly="True" MinLines="20"/>
+        <StackPanel x:Name="InputButtonStackPanel" Height="70" Margin="0" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.Row="1">
+            <Button x:Name="InputButton1" Content="Button1" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
+            <Button x:Name="InputButton2" Content="Button2" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
+            <Button x:Name="InputButton3" Content="Button3" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
+            <Button x:Name="InputButton4" Content="Button4" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
+            <Button x:Name="InputButton5" Content="Button5" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
+            <Button x:Name="InputButton6" Content="Button6" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
+            <Button x:Name="InputButton7" Content="Button7" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
+            <Button x:Name="InputButton8" Content="Button8" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
+            <Button x:Name="InputButton9" Content="Button9" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
         </StackPanel>
+
     </Grid>
 </Window>
