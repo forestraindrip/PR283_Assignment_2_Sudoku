@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:p = "clr-namespace:PR283_Assignment_2.Properties"
+
         xmlns:local="clr-namespace:PR283_Assignment_2"
         mc:Ignorable="d"
         Title="MainWindow" Width="660" Height="600">
@@ -14,15 +16,18 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Margin="0,50,0,0" Grid.RowSpan="2" Height="30" VerticalAlignment="Top">
-            <Label x:Name="TimerLabel" HorizontalAlignment="Left" Width="100" Margin="0" Content="Timer"/>
-            <Label x:Name="ScoreLabel" Content="Score" HorizontalAlignment="Left" Margin="100,0,0,0" Width="100"/>
+            <Label x:Name="TimerLabel"  Width="130" Margin="150,2,0,2" Content="{x:Static p:Resources.Timer}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label x:Name="ScoreLabel" 
+                   Content="{x:Static p:Resources.Score}"  Margin="100,0,0,0" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
         <Menu Grid.Row="0" x:Name="MainMenu" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Center">
-            <MenuItem x:Name="LoadButton" Header="Load" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalContentAlignment="Center" Click="LoadButton_Click"/>
-            <MenuItem x:Name="SaveButton" Header="Save" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="SaveButton_Click"/>
-            <MenuItem x:Name="RestartButton" Header="Restart" Height="50" Width="60" Click="RestartButton_Click"/>
+            <MenuItem x:Name="StartButton" Header="Start" Height="50" Width="60" 
+ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Click="StartButton_Click"/>
+            <MenuItem x:Name="LoadButton" Header="{x:Static p:Resources.Load}" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Click="LoadButton_Click"/>
+            <MenuItem x:Name="SaveButton" Header="{x:Static p:Resources.Save}" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="SaveButton_Click"/>
+            <MenuItem x:Name="RestartButton" Header="{x:Static p:Resources.Restart}" Height="50" Width="60" Click="RestartButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-            <ComboBox x:Name="LanguageComboBox" Width="113" Height="50" SelectionChanged="SetUILanguage" >
+            <ComboBox x:Name="LanguageComboBox" Width="89" Height="50" SelectionChanged="SetUILanguage" SelectedIndex="0" >
 
             </ComboBox>
 
@@ -44,8 +49,8 @@
                 <RowDefinition Height="0.16*"></RowDefinition>
                 <RowDefinition Height="0.16*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Content="Button" Margin="0"/>
-            <Button Content="Button" Grid.Column="1" Margin="0"/>
+            <Button Content="Button" Margin="0" MouseDown="SquareButtonMouseDown"/>
+            <Button Content="Button" Grid.Column="1" Margin="0" Drop="SquareButton_Drop"/>
             <Button Content="Button" Grid.Column="2" Margin="3.4,7,0,0" Width="43" Height="41"/>
             <Button Content="Button" Grid.Column="3" Margin="11,14,5,4"/>
             <Button Content="Button" Grid.Column="4" Margin="15,13,3,6"/>
@@ -53,15 +58,15 @@
         </Grid>
         <TextBox x:Name="MessageTextBox" Margin="0,1.6,19.6,109.8" TextWrapping="Wrap" Text="TextBox" Background="#FFFFF8DF" HorizontalAlignment="Right" Width="217" Grid.Row="1" IsReadOnly="True" MinLines="20"/>
         <StackPanel x:Name="InputButtonStackPanel" Height="70" Margin="0" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.Row="1">
-            <Button x:Name="InputButton1" Content="Button1" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button x:Name="InputButton2" Content="Button2" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button x:Name="InputButton3" Content="Button3" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button x:Name="InputButton4" Content="Button4" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button x:Name="InputButton5" Content="Button5" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button x:Name="InputButton6" Content="Button6" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button x:Name="InputButton7" Content="Button7" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button x:Name="InputButton8" Content="Button8" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button x:Name="InputButton9" Content="Button9" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
+            <Button x:Name="InputButton1" Content="{x:Static p:Resources.One}" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
+            <Button x:Name="InputButton2" Content="{x:Static p:Resources.Two}" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
+            <Button x:Name="InputButton3" Content="{x:Static p:Resources.Three}" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
+            <Button x:Name="InputButton4" Content="{x:Static p:Resources.Four}" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
+            <Button x:Name="InputButton5" Content="{x:Static p:Resources.Five}" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
+            <Button x:Name="InputButton6" Content="{x:Static p:Resources.Six}" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
+            <Button x:Name="InputButton7" Content="{x:Static p:Resources.Seven}" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
+            <Button x:Name="InputButton8" Content="{x:Static p:Resources.Eight}" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
+            <Button x:Name="InputButton9" Content="{x:Static p:Resources.Nine}" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
         </StackPanel>
 
     </Grid>

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MarcusJ;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace PR283_Assignment_2
 {
@@ -28,9 +31,14 @@ namespace PR283_Assignment_2
         protected int squareWidth;
         protected int squaresPerRow;
         protected int squaresPerColumn;
-        protected Grid myGrid;
+        protected SudokuGame sudokuGame;
         protected int dragedValue;
-        protected string language = "en-US"; // zh-TW
+        protected string currentLanguage = "English";
+        protected int maxSquareValue = -1;
+        protected int maxSquareAmount;
+        protected DispatcherTimer dispatcherTimer;
+        protected Stopwatch stopwatch;
+        protected DateTime startTime;
 
         protected Dictionary<string, Dictionary<string, string>> languageDictionary = new Dictionary<string, Dictionary<string, string>>();
 
@@ -66,7 +74,19 @@ namespace PR283_Assignment_2
             languageDictionary.Add("Traditional Chinese", zhTWDictionary);
             LanguageComboBox.ItemsSource = languageDictionary.Keys;
 
+            // Initialise game
+            if (maxSquareValue == -1)
+            {
+                maxSquareValue = 6;
+                sudokuGame = new SudokuGame(maxSquareValue, "..\\grid6x6.csv", "..\\solution6x6.csv");
+            }
+            maxSquareAmount = maxSquareValue * maxSquareValue;
+
+
+
             InitialiseUIElements();
+
+            // TEST
         }
 
         public void InitialiseUIElements()
@@ -93,6 +113,8 @@ namespace PR283_Assignment_2
         private void SetupSquareGrid()
         {
             SetupSquareGridSize();
+
+            AddGridButtons();
         }
 
         private void SetupSquareGridSize()
@@ -104,17 +126,49 @@ namespace PR283_Assignment_2
         public void AddGridButtons()
         {
             // Create a button
-            // Name the button
+            CreateGridButton();
             // Find the cell
             // Add the button to the cell
         }
 
+        protected Button CreateGridButton()
+        {
+            // TODO: CreateGridButton Factory method
+
+            for (int i = 0; i < maxSquareAmount; i++)
+            {
+                int cellValue = sudokuGame.GetCell(i);
+
+                Button button = new Button();
+                button.Name = "SquareButton" + string.Format("{0:00}", i);
+                button.Drop += SquareButtonDrop;
+                button.DragLeave += SquareButtonDragLeave;
+            }
+
+            return new Button();
+        }
+
+        private void SquareButtonDragLeave(object sender, DragEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SquareButtonDrop(object sender, DragEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+
         // Save
-        public void SaveGame() { }
+        protected void SaveGame() { }
 
         // Load
         // Do not override default value
-        public void LoadGmae() { }
+        protected void LoadGame() { }
+
+        protected void RestartGame() { }
 
         // Show row is completed
         public void ShowRowIsCompleted() { }
@@ -138,12 +192,6 @@ namespace PR283_Assignment_2
             // Define height of row
         }
 
-        public Button CreateGridButton()
-        {
-            // TODO: CreateGridButton
-            // TODO: Factory method
-            return new Button();
-        }
 
         public void PressButton(object sender, MouseButtonEventArgs e)
         {
@@ -159,17 +207,20 @@ namespace PR283_Assignment_2
         private void LoadButton_Click(object sender, RoutedEventArgs e)
         {
             // TODO: Load game
+            LoadGame();
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             // TODO: Save game
+            SaveGame();
 
         }
 
         private void RestartButton_Click(object sender, RoutedEventArgs e)
         {
             // TODO: Restart game
+            RestartGame();
         }
 
 
@@ -182,7 +233,7 @@ namespace PR283_Assignment_2
 
         private void SetUILanguage()
         {
-            // throw new NotImplementedException();
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
         }
 
         private void SetUILanguage(object sender, SelectionChangedEventArgs e)
@@ -199,11 +250,45 @@ namespace PR283_Assignment_2
 
 
 
+        // Timer
+        public void SetTimer()
+        {
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
+            dispatcherTimer.Tick += dipatcherTimer_Tick;
 
+            startTime = DateTime.Now;
+            dispatcherTimer.Start();
 
+        }
 
+        private void dipatcherTimer_Tick(object sender, EventArgs e)
+        {
+            TimeSpan timeSpan = DateTime.Now.Subtract(startTime);
+            TimerLabel.Content = string.Format("Timer(H:M:S): {0}:{1}:{2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+        }
 
-        // TODO: Timer
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            SetTimer();
+
+        }
+
+        private void Button_DragEnter(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void SquareButton_Drop(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void SquareButtonMouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
         // TODO: Prompt invalid number message
         // TODO: Show row is completed
         // TODO: Show column is completed

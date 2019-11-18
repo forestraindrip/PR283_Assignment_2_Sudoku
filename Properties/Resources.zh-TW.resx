@@ -118,54 +118,54 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Eight" xml:space="preserve">
-    <value>8</value>
+    <value />
   </data>
   <data name="English" xml:space="preserve">
-    <value>English</value>
+    <value />
   </data>
   <data name="Five" xml:space="preserve">
-    <value>5</value>
+    <value />
   </data>
   <data name="Four" xml:space="preserve">
-    <value>4</value>
+    <value />
   </data>
   <data name="Load" xml:space="preserve">
-    <value>Load</value>
+    <value />
   </data>
   <data name="Nine" xml:space="preserve">
-    <value>9</value>
+    <value />
   </data>
   <data name="One" xml:space="preserve">
-    <value>1</value>
+    <value />
   </data>
   <data name="Restart" xml:space="preserve">
-    <value>Restart</value>
+    <value />
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value />
   </data>
   <data name="Score" xml:space="preserve">
-    <value>Score</value>
+    <value />
   </data>
   <data name="Seven" xml:space="preserve">
-    <value>7</value>
+    <value />
   </data>
   <data name="Six" xml:space="preserve">
-    <value>6</value>
+    <value />
   </data>
   <data name="Three" xml:space="preserve">
-    <value>3</value>
+    <value />
   </data>
   <data name="Timer" xml:space="preserve">
-    <value>Timer</value>
+    <value />
   </data>
   <data name="TraditionalChinese" xml:space="preserve">
-    <value>Traditional Chinese</value>
+    <value />
   </data>
   <data name="Two" xml:space="preserve">
-    <value>2</value>
+    <value />
   </data>
   <data name="Zero" xml:space="preserve">
-    <value>0</value>
+    <value />
   </data>
 </root>
