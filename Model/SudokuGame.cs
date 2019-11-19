@@ -11,10 +11,10 @@ namespace MarcusJ
 {
     public class SudokuGame : ISudokuGame
     {
-        protected IGrid myGrid;
+        protected Grid myGrid;
         protected int maxValue;
-        protected int squaresPerColumn;
-        protected int squaresPerRow;
+        private int squaresPerColumn;
+        private int squaresPerRow;
         protected StreamReader myReader;
         protected StreamWriter myWriter;
         protected string gridCSVString;
@@ -22,6 +22,8 @@ namespace MarcusJ
         protected IndexGetter indexGetter;
         protected Validator validator;
 
+        public int SquaresPerColumn { get => squaresPerColumn; }
+        public int SquaresPerRow { get => squaresPerRow; }
 
         public SudokuGame(string gridFilePath, string solutionFilePath)
         {
@@ -53,7 +55,7 @@ namespace MarcusJ
         // Set array values to Grid
         public void Set(int[] cellValues)
         {
-            myGrid = new Grid(maxValue, squaresPerColumn, squaresPerRow);
+            myGrid = new Grid(maxValue, SquaresPerColumn, SquaresPerRow);
             for (int index = 0; index < cellValues.Length; index++)
             {
                 int value = cellValues[index];
@@ -61,14 +63,14 @@ namespace MarcusJ
             }
         }
 
-        public void SetSquareHeight(int squareHeight)
+        public void SetSquaresPerColumn(int squaresPerColumn)
         {
-            this.squaresPerColumn = squareHeight;
+            this.squaresPerColumn = squaresPerColumn;
         }
 
-        public void SetSquareWidth(int squareWidth)
+        public void SetSquarePerRow(int squarePerRow)
         {
-            this.squaresPerRow = squareWidth;
+            this.squaresPerRow = squarePerRow;
         }
 
         // Convert grid to array 
@@ -94,8 +96,8 @@ namespace MarcusJ
 
             maxValue = (int)Math.Sqrt(intArray.Length);
             SetMaxValue(maxValue);
-            SetSquareHeight((int)Math.Sqrt(maxValue));
-            SetSquareWidth(maxValue / squaresPerColumn);
+            SetSquaresPerColumn((int)Math.Sqrt(maxValue));
+            SetSquarePerRow(maxValue / SquaresPerColumn);
             Set(intArray); // Set values to Grid
         }
 
@@ -121,7 +123,7 @@ namespace MarcusJ
 
         public void SetCell(int value, int gridIndex)
         {
-            indexGetter = new IndexGetter(maxValue, squaresPerColumn, squaresPerRow);
+            indexGetter = new IndexGetter(maxValue, SquaresPerColumn, SquaresPerRow);
             int columnIndex = indexGetter.GetColumnIndex(gridIndex);
             int rowIndex = indexGetter.GetRowIndex(gridIndex);
             try

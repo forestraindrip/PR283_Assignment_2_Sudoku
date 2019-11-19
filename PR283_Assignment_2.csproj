@@ -75,7 +75,6 @@
     <Compile Include="Interface\ICompleteChecker.cs" />
     <Compile Include="Interface\IGame.cs" />
     <Compile Include="Interface\IGet.cs" />
-    <Compile Include="Interface\IGrid.cs" />
     <Compile Include="Interface\IGridFile.cs" />
     <Compile Include="Interface\ISerialize.cs" />
     <Compile Include="Interface\ISet.cs" />

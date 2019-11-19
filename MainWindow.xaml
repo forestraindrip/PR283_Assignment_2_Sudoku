@@ -27,35 +27,20 @@ ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrol
             <Button x:Name="SaveButton" Content="{x:Static p:Resources.Save}" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="SaveButton_Click"/>
             <Button x:Name="RestartButton" Content="{x:Static p:Resources.Restart}" Height="50" Width="60" Click="RestartButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-            <ComboBox x:Name="LanguageComboBox" Width="120" Height="50" SelectionChanged="ChangeSelectedLanguage" SelectedIndex="-1" >
+            <ComboBox x:Name="LanguageComboBox" Width="120" Height="50" SelectionChanged="LanguageComboBox_SelectionChanged" SelectedIndex="-1" >
                 <ComboBoxItem x:Name="EnglishLanguageButton" Width="120" Content="{x:Static p:Resources.English}" HorizontalAlignment="Center" VerticalAlignment="Center" Tag="English"/>
                 <ComboBoxItem x:Name="TraditionalChineseLanguageButton" Width="120" Content="{x:Static p:Resources.TraditionalChinese}" HorizontalAlignment="Center" VerticalAlignment="Center" Tag="TraditionalChinese"/>
             </ComboBox>
 
         </Menu>
-        <Grid x:Name="SquareGrid" Grid.Row="1" Margin="12,2.6,0,107.8"  Background="#FFEAFCFF" HorizontalAlignment="Left" Width="360" Height="360">
+        <Grid x:Name="DynamicGrid" Grid.Row="1" Margin="12,2.6,0,107.8"  Background="#FFEAFCFF" HorizontalAlignment="Left" Width="360" Height="360">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.16*"/>
-                <ColumnDefinition Width="0.16*"/>
-                <ColumnDefinition Width="0.16*"/>
-                <ColumnDefinition Width="0.16*"/>
-                <ColumnDefinition Width="0.16*"/>
-                <ColumnDefinition Width="0.16*"/>
+
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.16*"></RowDefinition>
-                <RowDefinition Height="0.16*"></RowDefinition>
-                <RowDefinition Height="0.16*"></RowDefinition>
-                <RowDefinition Height="0.16*"></RowDefinition>
-                <RowDefinition Height="0.16*"></RowDefinition>
-                <RowDefinition Height="0.16*"></RowDefinition>
+
             </Grid.RowDefinitions>
-            <Button Content="Button" Margin="0" MouseDown="SquareButtonMouseDown"/>
-            <Button Content="Button" Grid.Column="1" Margin="0" Drop="SquareButton_Drop"/>
-            <Button Content="Button" Grid.Column="2" Margin="3.4,7,0,0" Width="43" Height="41"/>
-            <Button Content="Button" Grid.Column="3" Margin="11,14,5,4"/>
-            <Button Content="Button" Grid.Column="4" Margin="15,13,3,6"/>
-            <Button Content="Button" Grid.Column="5" Margin="14,18,6,1"/>
+            <!--<Button Content="Button" Margin="0" MouseDown="GridButtonMouseDown"/>-->
         </Grid>
         <TextBox x:Name="MessageTextBox" Margin="0,1.6,19.6,109.8" TextWrapping="Wrap" Text="TextBox" Background="#FFFFF8DF" HorizontalAlignment="Right" Width="217" Grid.Row="1" IsReadOnly="True" MinLines="20"/>
         <StackPanel x:Name="InputButtonStackPanel" Height="70" Margin="0" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.Row="1">

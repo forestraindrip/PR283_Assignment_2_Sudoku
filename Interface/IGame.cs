@@ -10,8 +10,8 @@ namespace MarcusJ
         int GetMaxValue();
         int[] ToArray();      
         void Set(int[] cellValues);
-        void SetSquareWidth(int squareWidth);
-        void SetSquareHeight(int squareHeight);
+        void SetSquarePerRow(int squarePerRow);
+        void SetSquaresPerColumn(int squarePerColumn);
         void Restart();
     }
 }

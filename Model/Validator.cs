@@ -8,10 +8,10 @@ namespace MarcusJ
 {
     public class Validator 
     {
-        protected IGrid myGrid;
+        protected Grid myGrid;
         protected int maxValue;
 
-        public Validator(int maxValue, IGrid grid)
+        public Validator(int maxValue, Grid grid)
         {
             this.maxValue = maxValue;
             this.myGrid = grid;
