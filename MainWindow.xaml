@@ -45,15 +45,24 @@ ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrol
         </Grid>
         <TextBox x:Name="MessageTextBox" Margin="0,1.6,19.6,109.8" TextWrapping="Wrap" Text="TextBox" Background="#FFFFF8DF" HorizontalAlignment="Right" Width="217" Grid.Row="1" IsReadOnly="True" MinLines="20"/>
         <StackPanel x:Name="InputButtonStackPanel" Height="70" Margin="0" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.Row="1">
-            <Button x:Name="InputButton1" Content="{x:Static p:Resources.One}" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button x:Name="InputButton2" Content="{x:Static p:Resources.Two}" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button x:Name="InputButton3" Content="{x:Static p:Resources.Three}" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button x:Name="InputButton4" Content="{x:Static p:Resources.Four}" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button x:Name="InputButton5" Content="{x:Static p:Resources.Five}" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button x:Name="InputButton6" Content="{x:Static p:Resources.Six}" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button x:Name="InputButton7" Content="{x:Static p:Resources.Seven}" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button x:Name="InputButton8" Content="{x:Static p:Resources.Eight}" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
-            <Button x:Name="InputButton9" Content="{x:Static p:Resources.Nine}" Height="50" Width="50" Margin="10"  Cursor="Hand"/>
+            <Button x:Name="InputButton1" Content="{x:Static p:Resources.One}" Height="50" Width="50" Margin="10"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown" MouseMove="InputButton_MouseMove"
+              CommandParameter="1"/>
+            <Button x:Name="InputButton2" Content="{x:Static p:Resources.Two}" Height="50" Width="50" Margin="10"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown" MouseMove="InputButton_MouseMove"
+              CommandParameter="2"/>
+            <Button x:Name="InputButton3" Content="{x:Static p:Resources.Three}" Height="50" Width="50" Margin="10"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown" MouseMove="InputButton_MouseMove"
+              CommandParameter="3"/>
+            <Button x:Name="InputButton4" Content="{x:Static p:Resources.Four}" Height="50" Width="50" Margin="10"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown" MouseMove="InputButton_MouseMove"
+              CommandParameter="4"/>
+            <Button x:Name="InputButton5" Content="{x:Static p:Resources.Five}" Height="50" Width="50" Margin="10"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown" MouseMove="InputButton_MouseMove"
+              CommandParameter="5"/>
+            <Button x:Name="InputButton6" Content="{x:Static p:Resources.Six}" Height="50" Width="50" Margin="10"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown" MouseMove="InputButton_MouseMove"
+              CommandParameter="6"/>
+            <Button x:Name="InputButton7" Content="{x:Static p:Resources.Seven}" Height="50" Width="50" Margin="10"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown" MouseMove="InputButton_MouseMove"
+              CommandParameter="7"/>
+            <Button x:Name="InputButton8" Content="{x:Static p:Resources.Eight}" Height="50" Width="50" Margin="10"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown" MouseMove="InputButton_MouseMove"
+              CommandParameter="8"/>
+            <Button x:Name="InputButton9" Content="{x:Static p:Resources.Nine}" Height="50" Width="50" Margin="10"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown" MouseMove="InputButton_MouseMove"
+              CommandParameter="9"/>
         </StackPanel>
 
     </Grid>

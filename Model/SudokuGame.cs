@@ -19,17 +19,19 @@ namespace MarcusJ
         protected StreamWriter myWriter;
         protected string gridCSVString;
         protected int[] solution;
-        protected IndexGetter indexGetter;
-        protected Validator validator;
+        private IndexGetter indexGetter;
+        private Validator validator;
 
         public int SquaresPerColumn { get => squaresPerColumn; }
         public int SquaresPerRow { get => squaresPerRow; }
+        public IndexGetter IndexGetter { get => indexGetter; }
+        public Validator Validator { get => validator; }
 
         public SudokuGame(string gridFilePath, string solutionFilePath)
         {
             LoadCSVFileToGrid(gridFilePath);
 
-            validator = new Validator(maxValue, myGrid);
+            this.validator = new Validator(maxValue, myGrid);
 
             string solutionString = LoadFile(solutionFilePath);
             solution = ConvertCSVToArray(solutionString);
@@ -81,8 +83,8 @@ namespace MarcusJ
 
             for (int index = 0; index < maxValue * maxValue; index++)
             {
-                int columnIndex = indexGetter.GetColumnIndex(index);
-                int rowIndex = indexGetter.GetRowIndex(index);
+                int columnIndex = IndexGetter.GetColumnIndex(index);
+                int rowIndex = IndexGetter.GetRowIndex(index);
                 gridArray[index] = this.myGrid.GetByColumn(columnIndex, rowIndex);
             }
 
@@ -124,8 +126,8 @@ namespace MarcusJ
         public void SetCell(int value, int gridIndex)
         {
             indexGetter = new IndexGetter(maxValue, SquaresPerColumn, SquaresPerRow);
-            int columnIndex = indexGetter.GetColumnIndex(gridIndex);
-            int rowIndex = indexGetter.GetRowIndex(gridIndex);
+            int columnIndex = IndexGetter.GetColumnIndex(gridIndex);
+            int rowIndex = IndexGetter.GetRowIndex(gridIndex);
             try
             {
                 myGrid.SetByColumn(value, columnIndex, rowIndex);
@@ -138,8 +140,8 @@ namespace MarcusJ
 
         public int GetCell(int gridIndex)
         {
-            int columnIndex = indexGetter.GetColumnIndex(gridIndex);
-            int rowIndex = indexGetter.GetRowIndex(gridIndex);
+            int columnIndex = IndexGetter.GetColumnIndex(gridIndex);
+            int rowIndex = IndexGetter.GetRowIndex(gridIndex);
             return myGrid.GetByColumn(columnIndex, rowIndex);
         }
 
@@ -149,8 +151,8 @@ namespace MarcusJ
             string result = "";
             for (int index = 0; index < maxValue * maxValue; index++)
             {
-                int rowIndex = indexGetter.GetRowIndex(index);
-                int columnIndex = indexGetter.GetColumnIndex(index);
+                int rowIndex = IndexGetter.GetRowIndex(index);
+                int columnIndex = IndexGetter.GetColumnIndex(index);
                 int value = myGrid.GetByRow(rowIndex, columnIndex);
                 result += (columnIndex == maxValue - 1) ? value + "\r\n" : value + ",";
             }
@@ -219,8 +221,8 @@ namespace MarcusJ
         // 22.	The game can check whether the value in the cell is correct
         public bool IsCorrectValue(int gridIndex)
         {
-            int rowIndex = indexGetter.GetRowIndex(gridIndex);
-            int columnIndex = indexGetter.GetColumnIndex(gridIndex);
+            int rowIndex = IndexGetter.GetRowIndex(gridIndex);
+            int columnIndex = IndexGetter.GetColumnIndex(gridIndex);
             int value = myGrid.GetByRow(rowIndex, columnIndex);
 
             int solutionValue = solution[gridIndex];
@@ -237,20 +239,20 @@ namespace MarcusJ
 
         public bool IsValidColumn(int gridIndex)
         {
-            int columnIndex = indexGetter.GetColumnIndex(gridIndex);
-            return validator.IsValidColumn(columnIndex);
+            int columnIndex = IndexGetter.GetColumnIndex(gridIndex);
+            return Validator.IsValidColumn(columnIndex);
         }
 
         public bool IsValidRow(int gridIndex)
         {
-            int rowIndex = indexGetter.GetRowIndex(gridIndex);
-            return validator.IsValidRow(rowIndex);
+            int rowIndex = IndexGetter.GetRowIndex(gridIndex);
+            return Validator.IsValidRow(rowIndex);
         }
 
         public bool IsValidSquare(int gridIndex)
         {
-            int squareIndex = indexGetter.GetSquareIndex(gridIndex);
-            return validator.IsValidSquare(squareIndex);
+            int squareIndex = IndexGetter.GetSquareIndex(gridIndex);
+            return Validator.IsValidSquare(squareIndex);
         }
     }
 }

@@ -127,12 +127,14 @@
       <LastGenOutput>Resources.en-US.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
+    <None Include="grid4x4.csv" />
     <None Include="grid6x6.csv" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="solution4x4.csv" />
     <None Include="solution6x6.csv" />
   </ItemGroup>
   <ItemGroup>
