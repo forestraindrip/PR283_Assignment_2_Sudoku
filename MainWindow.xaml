@@ -21,15 +21,16 @@
                    Content="{x:Static p:Resources.Score}"  Margin="100,0,0,0" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
         <Menu Grid.Row="0" x:Name="MainMenu" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Center">
-            <Button x:Name="StartButton" Content="Start" Height="50" Width="60" 
+            <Button x:Name="StartButton" Content="{x:Static p:Resources.Start}" Height="50" Width="60" 
 ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Click="StartButton_Click"/>
+            
             <Button x:Name="LoadButton" Content="{x:Static p:Resources.Load}" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Click="LoadButton_Click"/>
             <Button x:Name="SaveButton" Content="{x:Static p:Resources.Save}" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="SaveButton_Click"/>
             <Button x:Name="RestartButton" Content="{x:Static p:Resources.Restart}" Height="50" Width="60" Click="RestartButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
             <ComboBox x:Name="LanguageComboBox" Width="120" Height="50" SelectionChanged="LanguageComboBox_SelectionChanged" SelectedIndex="-1" >
-                <ComboBoxItem x:Name="EnglishLanguageButton" Width="120" Content="{x:Static p:Resources.English}" HorizontalAlignment="Center" VerticalAlignment="Center" Tag="English"/>
-                <ComboBoxItem x:Name="TraditionalChineseLanguageButton" Width="120" Content="{x:Static p:Resources.TraditionalChinese}" HorizontalAlignment="Center" VerticalAlignment="Center" Tag="TraditionalChinese"/>
+                <ComboBoxItem x:Name="EnglishLanguageButton" Width="120" Content="{x:Static p:Resources.English}" HorizontalAlignment="Center" VerticalAlignment="Center" Tag="en-US"/>
+                <ComboBoxItem x:Name="TraditionalChineseLanguageButton" Width="120" Content="{x:Static p:Resources.TraditionalChinese}" HorizontalAlignment="Center" VerticalAlignment="Center" Tag="zh-TW"/>
             </ComboBox>
 
         </Menu>

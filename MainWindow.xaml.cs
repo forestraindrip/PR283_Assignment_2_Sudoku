@@ -3,8 +3,10 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -39,10 +41,12 @@ namespace PR283_Assignment_2
         protected int gridButtonHeight = 50;
         protected int gridButtonWidth = 50;
 
+        protected Button trackedButton;
+        protected bool mouseIsLeft = false;
 
         protected SudokuGame sudokuGame;
         protected int dragedValue;
-        protected string currentLanguage = "English";
+        protected string currentLanguage;
         protected int maxSquareValue = -1;
         protected int maxSquareAmount;
         protected DispatcherTimer dispatcherTimer;
@@ -82,6 +86,7 @@ namespace PR283_Assignment_2
             maxSquareValue = sudokuGame.GetMaxValue();
             maxSquareAmount = maxSquareValue * maxSquareValue;
 
+            currentLanguage = Thread.CurrentThread.CurrentUICulture.ToString();
             InitialiseUIElements();
 
             // TEST
@@ -92,7 +97,7 @@ namespace PR283_Assignment_2
         public void InitialiseUIElements()
         {
             // TODO: InitialiseUIElements
-            SetUILanguage();
+            //SetUILanguage(currentLanguage);
 
             SetupSquareGrid();
 
@@ -150,18 +155,58 @@ namespace PR283_Assignment_2
 
             Button button = new Button();
             button.Name = "GridButton" + string.Format("{0:00}", gridIndex);
+            button.Cursor = Cursors.Hand;
             button.CommandParameter = cellValue;
+            if (cellValue != 0) { button.IsEnabled = false; }
+
 
             string buttonContent = numberDictionary[cellValue];
             button.Content = Properties.Resources.ResourceManager.GetString(buttonContent);
 
-            button.Drop += GridButton_Drop;
-            button.DragLeave += GridButton_DragLeave;
+            button.PreviewMouseLeftButtonDown += new MouseButtonEventHandler((object sender, MouseButtonEventArgs e) =>
+            {
+                trackedButton = (Button)sender;
+            });
+
+            button.PreviewMouseLeftButtonUp += new MouseButtonEventHandler((object sender, MouseButtonEventArgs e) =>
+            {
+                //AddMessageToMessageBoard(mouseIsLeft.ToString());
+                if (Object.ReferenceEquals(sender, trackedButton))
+                {
+                    AddMessageToMessageBoard(trackedButton.CommandParameter.ToString());
+                    trackedButton = null;
+                }
+            });
+
+            //button.PreviewMouseMove += new MouseEventHandler((object sender, MouseEventArgs e) =>
+            //{
+            //    //https://www.wpftutorial.net/draganddrop.html
+            //    if (e.LeftButton == MouseButtonState.Pressed && trackedButton.IsMouseOver)
+            //    {
+            //        //AddMessageToMessageBoard(trackedButton.Name);
+            //        Button senderBtn = (Button)sender;
+
+            //    }
+            //});
+
+            button.MouseLeave += new MouseEventHandler((object sender, MouseEventArgs e) =>
+            {
+                mouseIsLeft = true;
+                //AddMessageToMessageBoard(mouseIsLeft.ToString());
+            });
+
+            button.MouseEnter += new MouseEventHandler((object sender, MouseEventArgs e) =>
+            {
+                if (Mouse.LeftButton == MouseButtonState.Released)
+                {
+                    mouseIsLeft = false;
+                    //AddMessageToMessageBoard(mouseIsLeft.ToString());
+                }
+            });
+
+            //button.Drop += new DragEventHandler (GridButton_Drop);
             return button;
         }
-
-
-
 
 
 
@@ -244,14 +289,8 @@ namespace PR283_Assignment_2
         // Event Handler
         /***************************/
 
-        private void GridButton_DragLeave(object sender, DragEventArgs e)
-        {
-            Button senderBtn = (Button)sender;
-            AddMessageToMessageBoard("TEST");
-            senderBtn.Tag = 0;
-        }
 
-        private void GridButton_Drop(object sender, DragEventArgs e)
+        private void GridButton_Drop(object sender, EventArgs e)
         {
             throw new NotImplementedException();
         }
@@ -300,21 +339,35 @@ namespace PR283_Assignment_2
         {
             // TODO: change language
             ComboBox comboBox = (ComboBox)sender;
-
-            //SetUILanguage();
-            AddMessageToMessageBoard(comboBox.SelectedItem.ToString());
+            ComboBoxItem comboBoxItem = comboBox.SelectedItem as ComboBoxItem;
+            SetUILanguage(comboBoxItem.Tag.ToString());
+            //AddMessageToMessageBoard(comboBox.SelectedItem.ToString());
         }
         /**************************************************************/
 
-        private void SetUILanguage()
+        private void SetUILanguage(string languageCode)
         {
             // https://www.tutorialspoint.com/wpf/wpf_localization.htm
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
 
-            //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("zh-TW");
+            // System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("zh-TW");
+            //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(languageCode);
+            if (languageCode != currentLanguage)
+            {
+                ChangeCulture(new CultureInfo(languageCode));
+            }
+
         }
 
-
+        protected static void ChangeCulture(CultureInfo newCulture)
+        {
+            // https://jeremybytes.blogspot.com/2013/07/changing-culture-in-wpf.html
+            Thread.CurrentThread.CurrentCulture = newCulture;
+            Thread.CurrentThread.CurrentUICulture = newCulture;
+            var oldWindow = Application.Current.MainWindow;
+            Application.Current.MainWindow = new MainWindow();
+            Application.Current.MainWindow.Show();
+            oldWindow.Close();
+        }
 
         protected void AddMessageToMessageBoard(string message)
         {

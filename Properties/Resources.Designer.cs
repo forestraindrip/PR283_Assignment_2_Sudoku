@@ -169,6 +169,15 @@ namespace PR283_Assignment_2.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        public static string Start {
+            get {
+                return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 3.
         /// </summary>
         public static string Three {
@@ -205,7 +214,7 @@ namespace PR283_Assignment_2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0.
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string Zero {
             get {

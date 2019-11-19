@@ -153,6 +153,9 @@
   <data name="Six" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
   <data name="Three" xml:space="preserve">
     <value>3</value>
   </data>
@@ -166,6 +169,6 @@
     <value>2</value>
   </data>
   <data name="Zero" xml:space="preserve">
-    <value>0</value>
+    <value />
   </data>
 </root>
