@@ -42,6 +42,7 @@ namespace PR283_Assignment_2
         protected int gridButtonHeight = 50;
         protected int gridButtonWidth = 50;
 
+        // https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.brushes?view=netframework-4.8
         protected Brush defaultButtonColor = Brushes.LightYellow;
         protected Brush variedButtonColor = Brushes.LightSkyBlue;
 
@@ -223,7 +224,6 @@ namespace PR283_Assignment_2
                     ShowCompletedRow(index);
                     ShowCompletedColumn(index);
                 });
-
             }
 
 
@@ -367,7 +367,7 @@ namespace PR283_Assignment_2
         private void dipatcherTimer_Tick(object sender, EventArgs e)
         {
             TimeSpan timeSpan = DateTime.Now.Subtract(startTime);
-            TimerLabel.Content = string.Format("Timer(H:M:S): {0}:{1}:{2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+            TimerFigureLabel.Content = string.Format("(H:M:S): {0}:{1}:{2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
@@ -413,7 +413,8 @@ namespace PR283_Assignment_2
 
         protected void AddMessageToMessageBoard<T>(T message)
         {
-            MessageTextBox.Text += "\r\n" + message.ToString();
+            MessageTextBox.AppendText("\r\n" + message.ToString());
+            MessageTextBox.ScrollToEnd();
         }
 
 

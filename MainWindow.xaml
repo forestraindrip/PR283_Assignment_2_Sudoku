@@ -9,21 +9,28 @@
         mc:Ignorable="d"
         Title="MainWindow" Width="660" Height="600">
 
-    <Grid x:Name="MainGrid" Margin="10" >
+    <Grid x:Name="MainGrid" Margin="10,10,9.6,19.4" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="300*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid Margin="0,50,0,0" Grid.RowSpan="2" Height="30" VerticalAlignment="Top">
-            <Label x:Name="TimerLabel"  Width="130" Margin="150,2,0,2" Content="{x:Static p:Resources.Timer}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="440*"/>
+            <ColumnDefinition Width="220"/>
+        </Grid.ColumnDefinitions>
+        <Grid Margin="0" Height="50" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2">
+            <Label x:Name="TimerLabel"  Width="50" Margin="120,0,0,0" Content="{x:Static p:Resources.Timer}" HorizontalAlignment="Left" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="TimerFigureLabel"  Content="Label"  HorizontalAlignment="Left" Margin="180,0,0,0" Width="100" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label x:Name="ScoreLabel" 
-                   Content="{x:Static p:Resources.Score}"  Margin="100,0,0,0" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                   Content="{x:Static p:Resources.Score}"  Margin="300,0,0,0" Width="50" HorizontalAlignment="Left" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="ScoreFigureLabel" Content="Label" HorizontalAlignment="Left" Margin="370,0,0,0" Width="100" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </Grid>
-        <Menu Grid.Row="0" x:Name="MainMenu" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Center">
+        <Menu  Grid.Row="0" Grid.ColumnSpan="2" x:Name="MainMenu" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Center" >
             <Button x:Name="StartButton" Content="{x:Static p:Resources.Start}" Height="50" Width="60" 
 ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Click="StartButton_Click"/>
-            
+
             <Button x:Name="LoadButton" Content="{x:Static p:Resources.Load}" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Click="LoadButton_Click"/>
             <Button x:Name="SaveButton" Content="{x:Static p:Resources.Save}" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="SaveButton_Click"/>
             <Button x:Name="RestartButton" Content="{x:Static p:Resources.Restart}" Height="50" Width="60" Click="RestartButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -34,17 +41,8 @@ ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrol
             </ComboBox>
 
         </Menu>
-        <Grid x:Name="DynamicGrid" Grid.Row="1" Margin="12,2.6,0,107.8"  Background="#FFEAFCFF" HorizontalAlignment="Left" Width="360" Height="360">
-            <Grid.ColumnDefinitions>
-
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-
-            </Grid.RowDefinitions>
-            <!--<Button Content="Button" Margin="0" MouseDown="GridButtonMouseDown"/>-->
-        </Grid>
-        <TextBox x:Name="MessageTextBox" Margin="0,1.6,19.6,109.8" TextWrapping="Wrap" Text="TextBox" Background="#FFFFF8DF" HorizontalAlignment="Right" Width="217" Grid.Row="1" IsReadOnly="True" MinLines="20"/>
-        <StackPanel x:Name="InputButtonStackPanel" Height="70" Margin="0" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.Row="1">
+        <Grid x:Name="DynamicGrid" Margin="0"  Background="#FFEAFCFF" Height="360" VerticalAlignment="Top" Grid.Row="2" HorizontalAlignment="Left" Width="360"/>
+        <StackPanel x:Name="InputButtonStackPanel" Height="70" Margin="0,0,-0.4,-8.2" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="2">
             <Button x:Name="InputButton1" Content="{x:Static p:Resources.One}" Height="50" Width="50" Margin="10"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown" MouseMove="InputButton_MouseMove"
               CommandParameter="1"/>
             <Button x:Name="InputButton2" Content="{x:Static p:Resources.Two}" Height="50" Width="50" Margin="10"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown" MouseMove="InputButton_MouseMove"
@@ -64,6 +62,7 @@ ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrol
             <Button x:Name="InputButton9" Content="{x:Static p:Resources.Nine}" Height="50" Width="50" Margin="10"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown" MouseMove="InputButton_MouseMove"
               CommandParameter="9"/>
         </StackPanel>
+        <TextBox x:Name="MessageTextBox" Margin="0,0,0,15" TextWrapping="Wrap" Background="#FFFFF8DF" HorizontalAlignment="Right" Width="217" IsReadOnly="True" MinLines="20" VerticalScrollBarVisibility="Auto" FontSize="20" Grid.Row="2" Grid.Column="1"/>
 
     </Grid>
 </Window>
