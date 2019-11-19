@@ -36,11 +36,15 @@ namespace PR283_Assignment_2
         //protected int squareHeight;
         //protected int squareWidth;
 
-        protected int squaresPerRow;
-        protected int squaresPerColumn;
+        //protected int squaresPerRow;
+        //protected int squaresPerColumn;
 
         protected int gridButtonHeight = 50;
         protected int gridButtonWidth = 50;
+
+        protected Brush defaultButtonColor = Brushes.LightYellow;
+        protected Brush variedButtonColor = Brushes.LightSkyBlue;
+
 
         protected Button trackedButton;
         protected Point mouseStartPoint;
@@ -91,7 +95,6 @@ namespace PR283_Assignment_2
             InitialiseUIElements();
 
             // TEST
-            ShowCompletedRow(0);
 
         }
 
@@ -158,6 +161,7 @@ namespace PR283_Assignment_2
             button.Name = "GridButton" + string.Format("{0:00}", gridIndex);
             button.FontSize = 20;
             button.Cursor = Cursors.Hand;
+            button.Background = defaultButtonColor;
             button.AllowDrop = true;
             UpdateButtonContent(cellValue, button);
 
@@ -215,6 +219,7 @@ namespace PR283_Assignment_2
                     else { AddMessageToMessageBoard("Is Not A Valid Value"); }
 
                     // TEST
+                    ShowCompletedSquare(index);
                     ShowCompletedRow(index);
                     ShowCompletedColumn(index);
                 });
@@ -433,26 +438,37 @@ namespace PR283_Assignment_2
             int rowIndex = sudokuGame.IndexGetter.GetRowIndex(cellIndex);
             //AddMessageToMessageBoard(rowIndex);
             bool isValidRow = sudokuGame.Validator.IsValidRow(rowIndex);
-            if (isValidRow)
+
+            for (int i = rowIndex * maxSquareValue; i < rowIndex * maxSquareValue + maxSquareValue; i++)
             {
-                for (int i = rowIndex * maxSquareValue; i < rowIndex * maxSquareValue + maxSquareValue; i++)
+                Button button = myGridButtons[i];
+                if (isValidRow)
                 {
-                    Button button = myGridButtons[i];
-                    button.Background = Brushes.Azure;
+                    button.Background = variedButtonColor;
+                }
+                else
+                {
+                    button.Background = defaultButtonColor;
                 }
             }
+
         }
         // TODO: Show column is completed
         protected void ShowCompletedColumn(int cellIndex)
         {
             int columnIndex = sudokuGame.IndexGetter.GetColumnIndex(cellIndex);
             bool isValidColumn = sudokuGame.Validator.IsValidColumn(columnIndex);
-            if (isValidColumn)
+
+            for (int i = columnIndex; i < maxSquareAmount; i = i + maxSquareValue)
             {
-                for (int i = columnIndex; i < maxSquareAmount; i = i + maxSquareValue)
+                Button button = myGridButtons[i];
+                if (isValidColumn)
                 {
-                    Button button = myGridButtons[i];
-                    button.Background = Brushes.Azure;
+                    button.Background = variedButtonColor;
+                }
+                else
+                {
+                    button.Background = defaultButtonColor;
                 }
             }
 
@@ -462,10 +478,34 @@ namespace PR283_Assignment_2
         {
             int squareIndex = sudokuGame.IndexGetter.GetSquareIndex(cellIndex);
             bool isValidSquare = sudokuGame.Validator.IsValidSquare(squareIndex);
-            if (isValidSquare)
-            {
 
+            int squarePerColumn = sudokuGame.SquaresPerColumn;
+            int squaresPerRow = sudokuGame.SquaresPerRow;
+
+            int squareWidth = maxSquareValue / squaresPerRow;
+            int squareHeight = maxSquareValue / squarePerColumn;
+
+            int columnIndex = (squareIndex % squaresPerRow) * squareWidth;
+            int rowIndex = (squareIndex / squaresPerRow) * squareHeight;
+
+
+            for (int y = rowIndex; y < rowIndex + squareHeight; y++)
+            {
+                for (int x = columnIndex; x < columnIndex + squareWidth; x++)
+                {
+                    int index = y * maxSquareValue + x;
+                    Button button = myGridButtons[index];
+                    if (isValidSquare)
+                    {
+                        button.Background = variedButtonColor;
+                    }
+                    else
+                    {
+                        button.Background = defaultButtonColor;
+                    }
+                }
             }
+
         }
         // TODO: Show game complete.
         protected void ShowGameCompleted()
