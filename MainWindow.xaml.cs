@@ -39,8 +39,8 @@ namespace PR283_Assignment_2
         //protected int squaresPerRow;
         //protected int squaresPerColumn;
 
-        protected int gridButtonHeight = 50;
-        protected int gridButtonWidth = 50;
+        protected int gridButtonHeight = 70;
+        protected int gridButtonWidth = 70;
 
         // https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.brushes?view=netframework-4.8
         protected Brush defaultButtonColor = Brushes.LightYellow;
@@ -61,8 +61,6 @@ namespace PR283_Assignment_2
         protected List<Button> myGridButtons = new List<Button>();
 
 
-        //protected Dictionary<string, Dictionary<string, string>> languageDictionary = new Dictionary<string, Dictionary<string, string>>();
-
         protected Dictionary<int, string> numberDictionary = new Dictionary<int, string>()
         {
             {1,"One" },
@@ -81,33 +79,25 @@ namespace PR283_Assignment_2
 
         public MainWindow()
         {
+            if (currentLanguage == null) { currentLanguage = "en-US"; }
             InitializeComponent();
-
-            // Initialise game
-            if (sudokuGame == null)
-            {
-                StartNewGame();
-            }
-
-            maxSquareValue = sudokuGame.GetMaxValue();
-            maxSquareAmount = maxSquareValue * maxSquareValue;
-
             currentLanguage = Thread.CurrentThread.CurrentUICulture.ToString();
-            InitialiseUIElements();
 
             // TEST
-
         }
 
         public void InitialiseUIElements()
         {
-            // TODO: InitialiseUIElements
             //SetUILanguage(currentLanguage);
+
+            DynamicGrid.Children.Clear();
+            DynamicGrid.RowDefinitions.Clear();
+            DynamicGrid.ColumnDefinitions.Clear();
 
             SetupSquareGrid();
 
             PopulateInputButtons();
-
+            UpdateGameStatus();
         }
 
         private void PopulateInputButtons()
@@ -131,15 +121,24 @@ namespace PR283_Assignment_2
         private void SetupSquareGrid()
         {
             SetupSquareGridSize();
-            DefineGrid();
+            AdjustWindowSize();
+            DefineDynamicGrid();
 
+        }
+
+        private void AdjustWindowSize()
+        {
+            this.Height = 250 + DynamicGrid.Height;
+            this.Width = 300 + DynamicGrid.Width < 660 ? 660 : 300 + DynamicGrid.Width;
         }
 
         private void SetupSquareGridSize()
         {
             gridHeight = gridButtonHeight * maxSquareValue;
-
             gridWidth = gridButtonWidth * maxSquareValue;
+
+            DynamicGrid.Height = gridHeight;
+            DynamicGrid.Width = gridWidth;
         }
 
 
@@ -178,60 +177,37 @@ namespace PR283_Assignment_2
                     trackedButton = null;
                 });
 
-                // Form https://stackoverflow.com/questions/11368377/how-to-drag-drop-buttons-in-a-grid
-                // WPF https://www.wpftutorial.net/draganddrop.html
-                button.MouseMove += new MouseEventHandler((object sender, MouseEventArgs e) =>
-                {
-                    Point mousePos = e.GetPosition(null);
-                    Vector diff = mouseStartPoint - mousePos;
-
-                    if (trackedButton != null &&
-                    e.LeftButton == MouseButtonState.Pressed &&
-                     (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance || Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance)
-                    )
-                    {
-                        int value = (int)trackedButton.CommandParameter;
-                        DragDrop.DoDragDrop(trackedButton, value, DragDropEffects.Move);
-                    }
-                });
-
-                // TODO: Drop data
-                button.Drop += new DragEventHandler((object sender, DragEventArgs e) =>
-                {
-
-                    Button btn = sender as Button;
-                    string indexString = Regex.Replace(btn.Name, @"^GridButton", "");
-                    int index = Int32.Parse(indexString);
-
-                    int value = Convert.ToInt32(e.Data.GetData("value").ToString());
-
-                    if (0 <= value && value <= maxSquareValue)
-                    {
-                        try
-                        {
-                            sudokuGame.SetCell(value, index);
-                        }
-                        catch (IsNotValidValueException exception)
-                        {
-                            AddMessageToMessageBoard("Is Not A Valid Value");
-                        }
-                        UpdateButtonContent(value, btn);
-                    }
-                    else { AddMessageToMessageBoard("Is Not A Valid Value"); }
-
-                    // TEST
-                    ShowCompletedSquare(index);
-                    ShowCompletedRow(index);
-                    ShowCompletedColumn(index);
-                });
+                button.Drop += GridButton_Drop;
             }
-
-
-
 
 
             //button.Drop += new DragEventHandler (GridButton_Drop);
             return button;
+        }
+
+        private void UpdateGameStatus()
+        {
+            // Update button colour
+            for (int index = 0; index < maxSquareAmount; index++)
+            {
+
+                Button button = myGridButtons[index];
+                if (sudokuGame.IsValidColumn(index) || sudokuGame.IsValidRow(index) || sudokuGame.IsValidSquare(index))
+                {
+                    button.Background = variedButtonColor;
+                }
+                else
+                {
+                    button.Background = defaultButtonColor;
+                }
+            }
+
+
+            if (sudokuGame.HasWon())
+            {
+                dispatcherTimer.Stop();
+                ShowGameCompleted();
+            }
         }
 
         private void UpdateButtonContent(int cellValue, Button button)
@@ -240,7 +216,6 @@ namespace PR283_Assignment_2
             string buttonContent = numberDictionary[cellValue];
             button.Content = Properties.Resources.ResourceManager.GetString(buttonContent);
         }
-
 
 
         // Save
@@ -255,18 +230,30 @@ namespace PR283_Assignment_2
                 try
                 {
                     var filePath = openFileDialog.FileName;
+                    if (sudokuGame == null)
+                    {
+                        sudokuGame = new SudokuGame("..\\grid4x4.csv", "..\\solution4x4.csv");
+                    }
                     sudokuGame.LoadCSVFileToGrid(filePath);
                 }
                 catch (Exception e)
                 {
-                    MessageTextBox.Text += e.Message;
+                    AddMessageToMessageBoard(e.Message);
+                    AddMessageToMessageBoard(e.Message);
                     throw e;
                 }
+                maxSquareValue = sudokuGame.GetMaxValue();
+                maxSquareAmount = maxSquareValue * maxSquareValue;
+                InitialiseUIElements();
             }
         }
         protected void StartNewGame()
         {
             sudokuGame = new SudokuGame("..\\grid4x4.csv", "..\\solution4x4.csv");
+            maxSquareValue = sudokuGame.GetMaxValue();
+            maxSquareAmount = maxSquareValue * maxSquareValue;
+            InitialiseUIElements();
+
         }
 
         protected void RestartGame() { }
@@ -275,7 +262,7 @@ namespace PR283_Assignment_2
 
         public void SetWindowHeight() { }
 
-        public void DefineGrid()
+        public void DefineDynamicGrid()
         {
             // Define row
             int rowPercentage = 100 / maxSquareValue;
@@ -297,95 +284,6 @@ namespace PR283_Assignment_2
         }
 
 
-        public void PressButton(object sender, MouseButtonEventArgs e)
-        {
-            if (sender.GetType() == typeof(Button))
-            {
-                Button button = sender as Button;
-                dragedValue = Int32.Parse(button.Content.ToString());
-            }
-        }
-        public void DragButtonOut() { }
-        public void DragButtonIn() { }
-
-        // Event Handler
-        /***************************/
-
-
-
-
-        private void LoadButton_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO: Load game
-            LoadGame();
-        }
-
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO: Save game
-            SaveGame();
-
-        }
-
-        private void RestartButton_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO: Restart game
-            RestartGame();
-        }
-
-        private void InputButton_MouseMove(object sender, MouseEventArgs e)
-        {
-            Point mousePos = e.GetPosition(null);
-            Vector diff = mouseStartPoint - mousePos;
-
-            if (
-            //trackedButton != null &&
-            e.LeftButton == MouseButtonState.Pressed
-            // (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance || Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance)
-            )
-            {
-                int value = (int)trackedButton.CommandParameter;
-                DragDrop.DoDragDrop(trackedButton, value, DragDropEffects.Copy);
-            }
-        }
-
-        private void Button_MouseButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            // https://codedocu.com/Details_Mobile?d=2434&a=9&f=331&l=0&v=m&t=WPF:-Drag-Drop-Example
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                Button button = sender as Button;
-                int value = Convert.ToInt32(button.CommandParameter.ToString());
-                DataObject dataObject = new DataObject();
-                dataObject.SetData("value", value);
-
-                DragDrop.DoDragDrop(button, dataObject, DragDropEffects.Copy);
-            }
-        }
-
-
-        private void dipatcherTimer_Tick(object sender, EventArgs e)
-        {
-            TimeSpan timeSpan = DateTime.Now.Subtract(startTime);
-            TimerFigureLabel.Content = string.Format("(H:M:S): {0}:{1}:{2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
-        }
-
-        private void StartButton_Click(object sender, RoutedEventArgs e)
-        {
-            SetTimer();
-            StartNewGame();
-        }
-
-
-        private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // TODO: change language
-            ComboBox comboBox = (ComboBox)sender;
-            ComboBoxItem comboBoxItem = comboBox.SelectedItem as ComboBoxItem;
-            SetUILanguage(comboBoxItem.Tag.ToString());
-            //AddMessageToMessageBoard(comboBox.SelectedItem.ToString());
-        }
-        /**************************************************************/
 
         private void SetUILanguage(string languageCode)
         {
@@ -413,11 +311,9 @@ namespace PR283_Assignment_2
 
         protected void AddMessageToMessageBoard<T>(T message)
         {
-            MessageTextBox.AppendText("\r\n" + message.ToString());
-            MessageTextBox.ScrollToEnd();
+            TextScrollViewer.Content += ("\r\n" + message.ToString());
+            TextScrollViewer.ScrollToEnd();
         }
-
-
 
         // Timer
         public void SetTimer()
@@ -432,86 +328,137 @@ namespace PR283_Assignment_2
         }
 
 
-
-        // TODO: Show row is completed
-        protected void ShowCompletedRow(int cellIndex)
-        {
-            int rowIndex = sudokuGame.IndexGetter.GetRowIndex(cellIndex);
-            //AddMessageToMessageBoard(rowIndex);
-            bool isValidRow = sudokuGame.Validator.IsValidRow(rowIndex);
-
-            for (int i = rowIndex * maxSquareValue; i < rowIndex * maxSquareValue + maxSquareValue; i++)
-            {
-                Button button = myGridButtons[i];
-                if (isValidRow)
-                {
-                    button.Background = variedButtonColor;
-                }
-                else
-                {
-                    button.Background = defaultButtonColor;
-                }
-            }
-
-        }
-        // TODO: Show column is completed
-        protected void ShowCompletedColumn(int cellIndex)
-        {
-            int columnIndex = sudokuGame.IndexGetter.GetColumnIndex(cellIndex);
-            bool isValidColumn = sudokuGame.Validator.IsValidColumn(columnIndex);
-
-            for (int i = columnIndex; i < maxSquareAmount; i = i + maxSquareValue)
-            {
-                Button button = myGridButtons[i];
-                if (isValidColumn)
-                {
-                    button.Background = variedButtonColor;
-                }
-                else
-                {
-                    button.Background = defaultButtonColor;
-                }
-            }
-
-        }
-        // TODO: Show square is completed
-        protected void ShowCompletedSquare(int cellIndex)
-        {
-            int squareIndex = sudokuGame.IndexGetter.GetSquareIndex(cellIndex);
-            bool isValidSquare = sudokuGame.Validator.IsValidSquare(squareIndex);
-
-            int squarePerColumn = sudokuGame.SquaresPerColumn;
-            int squaresPerRow = sudokuGame.SquaresPerRow;
-
-            int squareWidth = maxSquareValue / squaresPerRow;
-            int squareHeight = maxSquareValue / squarePerColumn;
-
-            int columnIndex = (squareIndex % squaresPerRow) * squareWidth;
-            int rowIndex = (squareIndex / squaresPerRow) * squareHeight;
-
-
-            for (int y = rowIndex; y < rowIndex + squareHeight; y++)
-            {
-                for (int x = columnIndex; x < columnIndex + squareWidth; x++)
-                {
-                    int index = y * maxSquareValue + x;
-                    Button button = myGridButtons[index];
-                    if (isValidSquare)
-                    {
-                        button.Background = variedButtonColor;
-                    }
-                    else
-                    {
-                        button.Background = defaultButtonColor;
-                    }
-                }
-            }
-
-        }
-        // TODO: Show game complete.
         protected void ShowGameCompleted()
         {
-
+            AddMessageToMessageBoard("YOU WIN!");
         }
+
+        // Event Handler
+        /***************************/
+        private void InputButtonStackPanel_Drop(object sender, DragEventArgs e)
+        {
+            Button sourceButton = e.Data.GetData("sender") as Button;
+
+
+            if (Regex.IsMatch(sourceButton.Name, @"^GridButton"))
+            {
+                string indexString = Regex.Replace(sourceButton.Name, @"^GridButton", "");
+                int index = Int32.Parse(indexString);
+                try
+                {
+                    sudokuGame.SetCell(0, index);
+                }
+                catch (IsNotValidValueException exception)
+                {
+                    AddMessageToMessageBoard("Is Not A Valid Value");
+                }
+                UpdateButtonContent(0, sourceButton);
+                UpdateGameStatus();
+
+            }
+        }
+
+        private void GridButton_Drop(object sender, DragEventArgs e)
+        {
+            Button sourceButton = e.Data.GetData("sender") as Button;
+            if (Regex.IsMatch(sourceButton.Name, @"^InputButton\d"))
+            {
+                Button button = sender as Button;
+                string indexString = Regex.Replace(button.Name, @"^GridButton", "");
+                int index = Int32.Parse(indexString);
+
+                int value = Convert.ToInt32(e.Data.GetData("value").ToString());
+
+                if (0 <= value && value <= maxSquareValue)
+                {
+                    try
+                    {
+                        sudokuGame.SetCell(value, index);
+                    }
+                    catch (IsNotValidValueException exception)
+                    {
+                        AddMessageToMessageBoard("Is Not A Valid Value");
+                    }
+                    UpdateButtonContent(value, button);
+                }
+                else { AddMessageToMessageBoard("Is Not A Valid Value"); }
+
+                UpdateGameStatus();
+
+                // TEST
+            }
+        }
+
+        private void LoadButton_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: Load game
+            LoadGame();
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: Save game
+            SaveGame();
+        }
+
+        private void RestartButton_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: Restart game
+            RestartGame();
+        }
+
+        private void Button_MouseButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            // https://codedocu.com/Details_Mobile?d=2434&a=9&f=331&l=0&v=m&t=WPF:-Drag-Drop-Example
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                Button button = sender as Button;
+                int value = Convert.ToInt32(button.CommandParameter.ToString());
+                DataObject dataObject = new DataObject();
+                dataObject.SetData("value", value);
+                dataObject.SetData("sender", sender);
+
+                DragDrop.DoDragDrop(button, dataObject, DragDropEffects.Copy);
+            }
+        }
+
+        private void dipatcherTimer_Tick(object sender, EventArgs e)
+        {
+            TimeSpan timeSpan = DateTime.Now.Subtract(startTime);
+            TimerFigureLabel.Content = string.Format("(H:M:S): {0}:{1}:{2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+        }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            SetTimer();
+            StartNewGame();
+        }
+
+
+        private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // TODO: change language
+            ComboBox comboBox = (ComboBox)sender;
+            ComboBoxItem comboBoxItem = comboBox.SelectedItem as ComboBoxItem;
+            SetUILanguage(comboBoxItem.Tag.ToString());
+            //AddMessageToMessageBoard(comboBox.SelectedItem.ToString());
+        }
+
+        private void GetHintTextBlock_Drop(object sender, DragEventArgs e)
+        {
+            Button sourceButton = e.Data.GetData("sender") as Button;
+
+            if (Regex.IsMatch(sourceButton.Name, @"^GridButton"))
+            {
+                string indexString = Regex.Replace(sourceButton.Name, @"^GridButton", "");
+                int index = Int32.Parse(indexString);
+
+                List<int> validValues = sudokuGame.GetValidValues(index);
+                string message = "Potential values: ";
+                validValues.ForEach(v => message += " "+ v);
+                AddMessageToMessageBoard(message);
+            }
+        }
+        /**************************************************************/
     }
 }

@@ -254,5 +254,10 @@ namespace MarcusJ
             int squareIndex = IndexGetter.GetSquareIndex(gridIndex);
             return Validator.IsValidSquare(squareIndex);
         }
+        public List<int> GetValidValues(int cellIndex)
+        {
+            return myGrid.GetValidValues(cellIndex);
+        }
+
     }
 }
