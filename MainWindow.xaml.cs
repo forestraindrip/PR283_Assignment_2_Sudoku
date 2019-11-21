@@ -1,12 +1,10 @@
 ﻿using MarcusJ;
 using Microsoft.Win32;
-using System.Runtime.Serialization.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -17,7 +15,6 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
@@ -58,10 +55,9 @@ namespace PR283_Assignment_2
         protected int maxSquareAmount;
         protected DispatcherTimer dispatcherTimer;
         protected DateTime startTime;
-        protected DateTime endTime;
         protected List<Button> myGridButtons = new List<Button>();
 
-
+        Dictionary<int, SudokuCreationStrategy> creationStrategies = new Dictionary<int, SudokuCreationStrategy>() { { 4, new SudokuCreation4x4() }, { 6, new SudokuCreation6x6() } };
         protected Dictionary<int, string> numberDictionary = new Dictionary<int, string>()
         {
             {1,"One" },
@@ -80,18 +76,21 @@ namespace PR283_Assignment_2
         public SudokuGame SudokuGame { get => sudokuGame; }
         public int MoveCount { get => moveCount; set => moveCount = value; }
         public TimeSpan TimeSpan { get => timeSpan; set => timeSpan = value; }
-        public DateTime EndTime { get => endTime; set => endTime = value; }
 
         public MainWindow()
         {
             if (currentLanguage == null) { currentLanguage = "en-US"; }
+            SetupDispatcherTimer();
+
             InitializeComponent();
             currentLanguage = Thread.CurrentThread.CurrentUICulture.ToString();
 
-            // TEST
-
-
-
+        }
+        private void SetupDispatcherTimer()
+        {
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
+            dispatcherTimer.Tick += dipatcherTimer_Tick;
         }
 
         public void InitialiseUIElements()
@@ -149,8 +148,6 @@ namespace PR283_Assignment_2
             DynamicGrid.Height = gridHeight;
             DynamicGrid.Width = gridWidth;
         }
-
-
 
         protected void CreateGridButtons()
         {
@@ -236,8 +233,6 @@ namespace PR283_Assignment_2
             button.Content = Properties.Resources.ResourceManager.GetString(buttonContent);
         }
 
-
-        // Save
         protected void SaveGame()
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -251,7 +246,6 @@ namespace PR283_Assignment_2
             }
         }
 
-        // Load
         protected void LoadGame()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -272,8 +266,7 @@ namespace PR283_Assignment_2
 
                 Save save = JsonConvert.DeserializeObject<Save>(jsonString);
                 moveCount = save.MoveCount;
-                startTime = save.EndTime;
-                // timeSpan = save.TimeSpan;
+                timeSpan = save.TimeSpan;
 
                 SudokuGame newSudokuGame = LoadSudokuGameFromSave(save);
 
@@ -282,7 +275,8 @@ namespace PR283_Assignment_2
                 maxSquareValue = sudokuGame.GetMaxValue();
                 maxSquareAmount = maxSquareValue * maxSquareValue;
                 InitialiseUIElements();
-                SetTimer();
+
+                StartTimer();
                 UpdateGameStatus();
             }
         }
@@ -338,19 +332,14 @@ namespace PR283_Assignment_2
         }
 
         protected void StartNewGame(int maxValue)
-        {
-            if (maxValue == 4)
-            {
-                sudokuGame = new SudokuGame("..\\grid4x4.csv", "..\\solution4x4.csv");
+        {   // Stragegy and Factory method
+            sudokuGame = creationStrategies[maxValue].CreateSudokuGame();
 
-            }
-            else if (maxValue == 6)
-            {
-                sudokuGame = new SudokuGame("..\\grid6x6.csv", "..\\solution6x6.csv");
-            }
             MoveCount = 0;
             maxSquareValue = sudokuGame.GetMaxValue();
             maxSquareAmount = maxSquareValue * maxSquareValue;
+            timeSpan = TimeSpan.Zero;
+            StartTimer();
             InitialiseUIElements();
             UpdateGameStatus();
 
@@ -392,8 +381,7 @@ namespace PR283_Assignment_2
         {
             // https://www.tutorialspoint.com/wpf/wpf_localization.htm
 
-            // System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("zh-TW");
-            //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(languageCode);
+
             if (languageCode != currentLanguage)
             {
                 ChangeCulture(new CultureInfo(languageCode));
@@ -418,20 +406,12 @@ namespace PR283_Assignment_2
             TextScrollViewer.ScrollToEnd();
         }
 
-        // Timer
-        public void SetTimer()
+        public void StartTimer()
         {
-            if (dispatcherTimer == null)
-            { dispatcherTimer = new DispatcherTimer(); }
-            dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
-            dispatcherTimer.Tick += dipatcherTimer_Tick;
-            if (startTime == DateTime.MinValue)
-            {
-                startTime = DateTime.Now;
-            }
+            startTime = DateTime.Now;
+
             dispatcherTimer.Start();
         }
-
 
         protected void ShowGameCompleted()
         {
@@ -495,19 +475,16 @@ namespace PR283_Assignment_2
 
                 UpdateGameStatus();
 
-                // TEST
             }
         }
 
         private void LoadButton_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Load game
             LoadGame();
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Save game
             SaveGame();
         }
 
@@ -534,8 +511,7 @@ namespace PR283_Assignment_2
 
         private void dipatcherTimer_Tick(object sender, EventArgs e)
         {
-
-            timeSpan = DateTime.Now.Subtract(startTime);
+            timeSpan = timeSpan.Add(TimeSpan.FromSeconds(1));
             TimerFigureLabel.Content = string.Format("(H:M:S): {0}:{1}:{2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
         }
 
@@ -544,11 +520,9 @@ namespace PR283_Assignment_2
             ComboBoxItem comboBoxItem = GridSizeComboxBox.SelectedItem as ComboBoxItem;
             string content = comboBoxItem.Content.ToString();
             int maxValue = Int32.Parse(content[0].ToString());
-            startTime = DateTime.MinValue;
-            SetTimer();
+
             StartNewGame(maxValue);
         }
-
 
         private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
