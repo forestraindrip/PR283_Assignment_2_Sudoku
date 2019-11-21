@@ -1,9 +1,11 @@
 ﻿using MarcusJ;
 using Microsoft.Win32;
+using System.Runtime.Serialization.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -19,6 +21,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Web;
 
 namespace PR283_Assignment_2
 {
@@ -38,6 +41,8 @@ namespace PR283_Assignment_2
 
         //protected int squaresPerRow;
         //protected int squaresPerColumn;
+        protected StreamWriter streamWriter;
+        protected StreamReader streamReader;
 
         protected int gridButtonHeight = 70;
         protected int gridButtonWidth = 70;
@@ -74,8 +79,7 @@ namespace PR283_Assignment_2
             {9,"Nine"},
             {0, "Zero"},
         };
-
-
+        private int moveCount;
 
         public MainWindow()
         {
@@ -96,6 +100,7 @@ namespace PR283_Assignment_2
 
             SetupSquareGrid();
 
+            myGridButtons.Clear();
             PopulateInputButtons();
             UpdateGameStatus();
         }
@@ -104,7 +109,7 @@ namespace PR283_Assignment_2
         {
             // Create buttons
             CreateGridButtons();
-            // Add the button to the cell
+            // Add the button to the grid
             for (int y = 0; y < maxSquareValue; y++)
             {
                 for (int x = 0; x < maxSquareValue; x++)
@@ -188,6 +193,23 @@ namespace PR283_Assignment_2
         private void UpdateGameStatus()
         {
             // Update button colour
+            UpdateButtonsColour();
+            UpdateScore();
+
+            if (sudokuGame.HasWon())
+            {
+                dispatcherTimer.Stop();
+                ShowGameCompleted();
+            }
+        }
+
+        private void UpdateScore()
+        {
+            ScoreFigureLabel.Content = maxSquareValue * maxSquareValue * 3 - moveCount;
+        }
+
+        private void UpdateButtonsColour()
+        {
             for (int index = 0; index < maxSquareAmount; index++)
             {
 
@@ -201,13 +223,6 @@ namespace PR283_Assignment_2
                     button.Background = defaultButtonColor;
                 }
             }
-
-
-            if (sudokuGame.HasWon())
-            {
-                dispatcherTimer.Stop();
-                ShowGameCompleted();
-            }
         }
 
         private void UpdateButtonContent(int cellValue, Button button)
@@ -219,7 +234,18 @@ namespace PR283_Assignment_2
 
 
         // Save
-        protected void SaveGame() { }
+        protected void SaveGame()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                var filePath = saveFileDialog.FileName;
+                if (sudokuGame != null)
+                {
+                    SaveFile(filePath);
+                }
+            }
+        }
 
         // Load
         protected void LoadGame()
@@ -230,11 +256,12 @@ namespace PR283_Assignment_2
                 try
                 {
                     var filePath = openFileDialog.FileName;
-                    if (sudokuGame == null)
-                    {
-                        sudokuGame = new SudokuGame("..\\grid4x4.csv", "..\\solution4x4.csv");
-                    }
-                    sudokuGame.LoadCSVFileToGrid(filePath);
+                    //if (sudokuGame == null)
+                    //{
+                    //    sudokuGame = new SudokuGame("..\\grid4x4.csv", "..\\solution4x4.csv");
+                    //}
+                    //sudokuGame.LoadCSVFileToGrid(filePath);
+                    string fileString = LoadFile(filePath);
                 }
                 catch (Exception e)
                 {
@@ -245,18 +272,63 @@ namespace PR283_Assignment_2
                 maxSquareValue = sudokuGame.GetMaxValue();
                 maxSquareAmount = maxSquareValue * maxSquareValue;
                 InitialiseUIElements();
+                UpdateGameStatus();
             }
         }
-        protected void StartNewGame()
+        protected string LoadFile(string filePath)
         {
-            sudokuGame = new SudokuGame("..\\grid4x4.csv", "..\\solution4x4.csv");
+
+            try
+            {
+                streamReader = new StreamReader(filePath);
+            }
+            catch (Exception e) { throw e; }
+            return streamReader.ReadToEnd();
+        }
+
+        protected void SaveFile(string filePath)
+        {
+            try
+            {
+                streamWriter = new StreamWriter(filePath);
+            }
+            catch (Exception e) { throw e; }
+            streamWriter.WriteLine(ToJSON());
+            streamWriter.Close();
+        }
+
+        protected string ToJSON()
+        {
+            string s = sudokuGame.ToCSV();
+
+            return s;
+
+        }
+
+        protected void StartNewGame(int maxValue)
+        {
+            if (maxValue == 4)
+            {
+                sudokuGame = new SudokuGame("..\\grid4x4.csv", "..\\solution4x4.csv");
+
+            }
+            else if (maxValue == 6)
+            {
+                sudokuGame = new SudokuGame("..\\grid6x6.csv", "..\\solution6x6.csv");
+            }
+            moveCount = 0;
             maxSquareValue = sudokuGame.GetMaxValue();
             maxSquareAmount = maxSquareValue * maxSquareValue;
             InitialiseUIElements();
+            UpdateGameStatus();
 
         }
 
-        protected void RestartGame() { }
+        protected void RestartGame()
+        {
+            StartNewGame(maxSquareValue);
+
+        }
 
         public void SetWindowWidth() { }
 
@@ -282,7 +354,6 @@ namespace PR283_Assignment_2
                 DynamicGrid.ColumnDefinitions.Add(columnDefinition);
             }
         }
-
 
 
         private void SetUILanguage(string languageCode)
@@ -352,6 +423,7 @@ namespace PR283_Assignment_2
                 {
                     AddMessageToMessageBoard("Is Not A Valid Value");
                 }
+                moveCount++;
                 UpdateButtonContent(0, sourceButton);
                 UpdateGameStatus();
 
@@ -379,6 +451,7 @@ namespace PR283_Assignment_2
                     {
                         AddMessageToMessageBoard("Is Not A Valid Value");
                     }
+                    moveCount++;
                     UpdateButtonContent(value, button);
                 }
                 else { AddMessageToMessageBoard("Is Not A Valid Value"); }
@@ -430,18 +503,19 @@ namespace PR283_Assignment_2
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
+            ComboBoxItem comboBoxItem = GridSizeComboxBox.SelectedItem as ComboBoxItem;
+            string content = comboBoxItem.Content.ToString();
+            int maxValue = Int32.Parse(content[0].ToString());
             SetTimer();
-            StartNewGame();
+            StartNewGame(maxValue);
         }
 
 
         private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // TODO: change language
             ComboBox comboBox = (ComboBox)sender;
             ComboBoxItem comboBoxItem = comboBox.SelectedItem as ComboBoxItem;
             SetUILanguage(comboBoxItem.Tag.ToString());
-            //AddMessageToMessageBoard(comboBox.SelectedItem.ToString());
         }
 
         private void GetHintTextBlock_Drop(object sender, DragEventArgs e)
@@ -455,7 +529,7 @@ namespace PR283_Assignment_2
 
                 List<int> validValues = sudokuGame.GetValidValues(index);
                 string message = "Potential values: ";
-                validValues.ForEach(v => message += " "+ v);
+                validValues.ForEach(v => message += " " + v);
                 AddMessageToMessageBoard(message);
             }
         }

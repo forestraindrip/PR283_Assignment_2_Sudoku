@@ -29,17 +29,22 @@
             <Label x:Name="ScoreFigureLabel" Content="Label" HorizontalAlignment="Left" Margin="396,0,0,0" Width="100" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </Grid>
         <Menu  Grid.Row="0" Grid.ColumnSpan="2" x:Name="MainMenu" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Center" Margin="0,0,-0.4,0" Grid.RowSpan="2" >
-            <Button x:Name="StartButton" Content="{x:Static p:Resources.Start}" Height="50" Width="60" 
-ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Click="StartButton_Click"/>
+            <ComboBox x:Name="GridSizeComboxBox" Height="50" Width="65" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectedIndex="0">
+                <ComboBoxItem Content="4x4" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <ComboBoxItem Content="6x6" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            </ComboBox>
+            <Button x:Name="StartButton4x4" Content="{x:Static p:Resources.Start}" Height="50" Width="60" 
+ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Click="StartButton_Click" CommandParameter="4"/>
 
             <Button x:Name="LoadButton" Content="{x:Static p:Resources.Load}" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Click="LoadButton_Click"/>
             <Button x:Name="SaveButton" Content="{x:Static p:Resources.Save}" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="SaveButton_Click"/>
             <Button x:Name="RestartButton" Content="{x:Static p:Resources.Restart}" Height="50" Width="60" Click="RestartButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-            <ComboBox x:Name="LanguageComboBox" Width="120" Height="50" SelectionChanged="LanguageComboBox_SelectionChanged"  >
+            <Label x:Name="LanguageSelectLabel" Content="Language" Height="50" Width="65" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <ComboBox x:Name="LanguageComboBox" Width="120" Height="50" SelectionChanged="LanguageComboBox_SelectionChanged" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
                 <ComboBoxItem x:Name="EnglishLanguageButton" Width="120" Content="{x:Static p:Resources.English}" HorizontalAlignment="Center" VerticalAlignment="Center" Tag="en-US"/>
                 <ComboBoxItem x:Name="TraditionalChineseLanguageButton" Width="120" Content="{x:Static p:Resources.TraditionalChinese}" HorizontalAlignment="Center" VerticalAlignment="Center" Tag="zh-TW"/>
             </ComboBox>
+
 
         </Menu>
         <Grid x:Name="DynamicGrid" Margin="10,10.8,0,10.8"  Background="#FFEAFCFF" Height="360" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Width="360" Grid.RowSpan="2"/>
