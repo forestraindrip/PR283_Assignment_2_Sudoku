@@ -44,8 +44,12 @@
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\MSTest.TestFramework.2.0.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -64,6 +68,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Save.cs" />
+    <Compile Include="SudokuCreation4x4.cs" />
+    <Compile Include="SudokuCreation6x6.cs" />
+    <Compile Include="SudokuCreationStrategy.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -75,7 +83,6 @@
     <Compile Include="Interface\ICompleteChecker.cs" />
     <Compile Include="Interface\IGame.cs" />
     <Compile Include="Interface\IGet.cs" />
-    <Compile Include="Interface\IGrid.cs" />
     <Compile Include="Interface\IGridFile.cs" />
     <Compile Include="Interface\ISerialize.cs" />
     <Compile Include="Interface\ISet.cs" />
@@ -128,12 +135,14 @@
       <LastGenOutput>Resources.en-US.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
+    <None Include="grid4x4.csv" />
     <None Include="grid6x6.csv" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="solution4x4.csv" />
     <None Include="solution6x6.csv" />
   </ItemGroup>
   <ItemGroup>

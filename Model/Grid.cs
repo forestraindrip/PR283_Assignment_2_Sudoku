@@ -5,13 +5,19 @@ using System.Linq;
 
 namespace MarcusJ
 {
-    public class Grid : IGrid
+    public class Grid : IGet, ISet, ICompleteChecker, IValuesGetter
     {
         protected int maxValue;
         protected int squareHeight;
         protected int squareWidth;
         protected int[] myCells;
         protected IndexGetter indexGetter;
+
+        public int MaxValue { get => maxValue; }
+        public int SquareHeight { get => squareHeight; }
+        public int SquareWidth { get => squareWidth; }
+        public int[] MyCells { get => myCells; }
+
 
         public Grid(int maxValue, int squareHeight, int squareWidth)
         {

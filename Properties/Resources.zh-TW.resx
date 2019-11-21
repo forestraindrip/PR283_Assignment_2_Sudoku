@@ -118,52 +118,67 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Eight" xml:space="preserve">
-    <value />
+    <value>八</value>
   </data>
   <data name="English" xml:space="preserve">
-    <value />
+    <value>英文</value>
   </data>
   <data name="Five" xml:space="preserve">
-    <value />
+    <value>五</value>
   </data>
   <data name="Four" xml:space="preserve">
-    <value />
+    <value>四</value>
+  </data>
+  <data name="GetHintTextBlockMsg" xml:space="preserve">
+    <value>拖拉一個格子到這裡來獲得提示</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>語言</value>
   </data>
   <data name="Load" xml:space="preserve">
-    <value />
+    <value>載入</value>
   </data>
   <data name="Nine" xml:space="preserve">
-    <value />
+    <value>九</value>
+  </data>
+  <data name="NotAValidValue" xml:space="preserve">
+    <value>不合法的數字</value>
   </data>
   <data name="One" xml:space="preserve">
-    <value />
+    <value>一</value>
   </data>
   <data name="Restart" xml:space="preserve">
-    <value />
+    <value>重新開始</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value />
+    <value>存檔</value>
   </data>
   <data name="Score" xml:space="preserve">
-    <value />
+    <value>分數</value>
   </data>
   <data name="Seven" xml:space="preserve">
-    <value />
+    <value>七</value>
   </data>
   <data name="Six" xml:space="preserve">
-    <value />
+    <value>六</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>開始</value>
   </data>
   <data name="Three" xml:space="preserve">
-    <value />
+    <value>三</value>
   </data>
   <data name="Timer" xml:space="preserve">
-    <value />
+    <value>計時</value>
   </data>
   <data name="TraditionalChinese" xml:space="preserve">
-    <value />
+    <value>繁體中文</value>
   </data>
   <data name="Two" xml:space="preserve">
-    <value />
+    <value>二</value>
+  </data>
+  <data name="YouWin" xml:space="preserve">
+    <value>你贏了!</value>
   </data>
   <data name="Zero" xml:space="preserve">
     <value />

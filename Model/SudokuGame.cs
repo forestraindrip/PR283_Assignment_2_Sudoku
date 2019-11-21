@@ -11,27 +11,39 @@ namespace MarcusJ
 {
     public class SudokuGame : ISudokuGame
     {
-        protected IGrid myGrid;
+        protected Grid myGrid;
         protected int maxValue;
-        protected int squaresPerColumn;
-        protected int squaresPerRow;
+        private int squaresPerColumn;
+        private int squaresPerRow;
         protected StreamReader myReader;
         protected StreamWriter myWriter;
-        protected string gridCSVString;
+        private string gridCSVString;
         protected int[] solution;
-        protected IndexGetter indexGetter;
-        protected Validator validator;
+        private IndexGetter indexGetter;
+        private Validator validator;
 
+        public int SquaresPerColumn { get => squaresPerColumn; }
+        public int SquaresPerRow { get => squaresPerRow; }
+        public IndexGetter IndexGetter { get => indexGetter; }
+        public Validator Validator { get => validator; }
+        public string GridCSVString { get => gridCSVString; set => gridCSVString = value; }
+        public Grid MyGrid { get => myGrid; set => myGrid = value; }
+        public int[] Solution { get => solution; set => solution = value; }
 
         public SudokuGame(string gridFilePath, string solutionFilePath)
         {
             LoadCSVFileToGrid(gridFilePath);
 
-            validator = new Validator(maxValue, myGrid);
+            this.validator = new Validator(maxValue, myGrid);
 
             string solutionString = LoadFile(solutionFilePath);
             solution = ConvertCSVToArray(solutionString);
 
+        }
+        public SudokuGame(Validator validator, IndexGetter indexGetter)
+        {
+            this.validator = validator;
+            this.indexGetter = indexGetter;
         }
 
         public int GetMaxValue()
@@ -53,7 +65,10 @@ namespace MarcusJ
         // Set array values to Grid
         public void Set(int[] cellValues)
         {
-            myGrid = new Grid(maxValue, squaresPerColumn, squaresPerRow);
+            if (myGrid == null)
+            {
+                myGrid = new Grid(maxValue, SquaresPerColumn, SquaresPerRow);
+            }
             for (int index = 0; index < cellValues.Length; index++)
             {
                 int value = cellValues[index];
@@ -61,14 +76,14 @@ namespace MarcusJ
             }
         }
 
-        public void SetSquareHeight(int squareHeight)
+        public void SetSquaresPerColumn(int squaresPerColumn)
         {
-            this.squaresPerColumn = squareHeight;
+            this.squaresPerColumn = squaresPerColumn;
         }
 
-        public void SetSquareWidth(int squareWidth)
+        public void SetSquarePerRow(int squarePerRow)
         {
-            this.squaresPerRow = squareWidth;
+            this.squaresPerRow = squarePerRow;
         }
 
         // Convert grid to array 
@@ -79,8 +94,8 @@ namespace MarcusJ
 
             for (int index = 0; index < maxValue * maxValue; index++)
             {
-                int columnIndex = indexGetter.GetColumnIndex(index);
-                int rowIndex = indexGetter.GetRowIndex(index);
+                int columnIndex = IndexGetter.GetColumnIndex(index);
+                int rowIndex = IndexGetter.GetRowIndex(index);
                 gridArray[index] = this.myGrid.GetByColumn(columnIndex, rowIndex);
             }
 
@@ -94,8 +109,8 @@ namespace MarcusJ
 
             maxValue = (int)Math.Sqrt(intArray.Length);
             SetMaxValue(maxValue);
-            SetSquareHeight((int)Math.Sqrt(maxValue));
-            SetSquareWidth(maxValue / squaresPerColumn);
+            SetSquaresPerColumn((int)Math.Sqrt(maxValue));
+            SetSquarePerRow(maxValue / SquaresPerColumn);
             Set(intArray); // Set values to Grid
         }
 
@@ -121,9 +136,12 @@ namespace MarcusJ
 
         public void SetCell(int value, int gridIndex)
         {
-            indexGetter = new IndexGetter(maxValue, squaresPerColumn, squaresPerRow);
-            int columnIndex = indexGetter.GetColumnIndex(gridIndex);
-            int rowIndex = indexGetter.GetRowIndex(gridIndex);
+            if (indexGetter == null)
+            {
+                indexGetter = new IndexGetter(maxValue, SquaresPerColumn, SquaresPerRow);
+            }
+            int columnIndex = IndexGetter.GetColumnIndex(gridIndex);
+            int rowIndex = IndexGetter.GetRowIndex(gridIndex);
             try
             {
                 myGrid.SetByColumn(value, columnIndex, rowIndex);
@@ -136,8 +154,8 @@ namespace MarcusJ
 
         public int GetCell(int gridIndex)
         {
-            int columnIndex = indexGetter.GetColumnIndex(gridIndex);
-            int rowIndex = indexGetter.GetRowIndex(gridIndex);
+            int columnIndex = IndexGetter.GetColumnIndex(gridIndex);
+            int rowIndex = IndexGetter.GetRowIndex(gridIndex);
             return myGrid.GetByColumn(columnIndex, rowIndex);
         }
 
@@ -147,8 +165,8 @@ namespace MarcusJ
             string result = "";
             for (int index = 0; index < maxValue * maxValue; index++)
             {
-                int rowIndex = indexGetter.GetRowIndex(index);
-                int columnIndex = indexGetter.GetColumnIndex(index);
+                int rowIndex = IndexGetter.GetRowIndex(index);
+                int columnIndex = IndexGetter.GetColumnIndex(index);
                 int value = myGrid.GetByRow(rowIndex, columnIndex);
                 result += (columnIndex == maxValue - 1) ? value + "\r\n" : value + ",";
             }
@@ -177,6 +195,7 @@ namespace MarcusJ
 
         private string LoadFile(string filePath)
         {
+            // TODO: NEED TO DELETE
             try
             {
                 myReader = new StreamReader(filePath);
@@ -200,7 +219,7 @@ namespace MarcusJ
         // 4.	The game can reset the game to the initial state
         public void Reset()
         {
-            FromCSV(gridCSVString);
+            FromCSV(GridCSVString);
         }
 
         // 21.	The game can check whether the player has won the game
@@ -217,8 +236,8 @@ namespace MarcusJ
         // 22.	The game can check whether the value in the cell is correct
         public bool IsCorrectValue(int gridIndex)
         {
-            int rowIndex = indexGetter.GetRowIndex(gridIndex);
-            int columnIndex = indexGetter.GetColumnIndex(gridIndex);
+            int rowIndex = IndexGetter.GetRowIndex(gridIndex);
+            int columnIndex = IndexGetter.GetColumnIndex(gridIndex);
             int value = myGrid.GetByRow(rowIndex, columnIndex);
 
             int solutionValue = solution[gridIndex];
@@ -235,20 +254,25 @@ namespace MarcusJ
 
         public bool IsValidColumn(int gridIndex)
         {
-            int columnIndex = indexGetter.GetColumnIndex(gridIndex);
-            return validator.IsValidColumn(columnIndex);
+            int columnIndex = IndexGetter.GetColumnIndex(gridIndex);
+            return Validator.IsValidColumn(columnIndex);
         }
 
         public bool IsValidRow(int gridIndex)
         {
-            int rowIndex = indexGetter.GetRowIndex(gridIndex);
-            return validator.IsValidRow(rowIndex);
+            int rowIndex = IndexGetter.GetRowIndex(gridIndex);
+            return Validator.IsValidRow(rowIndex);
         }
 
         public bool IsValidSquare(int gridIndex)
         {
-            int squareIndex = indexGetter.GetSquareIndex(gridIndex);
-            return validator.IsValidSquare(squareIndex);
+            int squareIndex = IndexGetter.GetSquareIndex(gridIndex);
+            return Validator.IsValidSquare(squareIndex);
         }
+        public List<int> GetValidValues(int cellIndex)
+        {
+            return myGrid.GetValidValues(cellIndex);
+        }
+
     }
 }

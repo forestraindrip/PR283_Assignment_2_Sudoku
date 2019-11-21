@@ -3,13 +3,13 @@
   <Class Name="MarcusJ.SudokuGame">
     <Position X="7.75" Y="2" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>UAAEAABACBARFIAgAIACAARIIEJAACAAAIAGAIBAFJg=</HashCode>
+      <HashCode>UAAEABBACBARVIAgIIgAIAVIIEJAACgAgIAWAIBAFJg=</HashCode>
       <FileName>Model\SudokuGame.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MarcusJ.Validator">
-    <Position X="17.5" Y="2" Width="1.5" />
+    <Position X="15.25" Y="5.75" Width="4" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAQAgAAAAAAAAAAJAAGAAAAAAAAAAAIA=</HashCode>
       <FileName>Model\Validator.cs</FileName>
@@ -25,7 +25,7 @@
   <Class Name="MarcusJ.Grid">
     <Position X="12" Y="2" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AEACAAFAgIAACAARcAAAAAAAAAAIAKAAAAAACAAAAwA=</HashCode>
+      <HashCode>AEACAAFAgIAASIARcAACAAAAAAAIAKAAAAAgCAAAAwA=</HashCode>
       <FileName>Model\Grid.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -33,12 +33,28 @@
   <Class Name="PR283_Assignment_2.MainWindow">
     <Position X="0.5" Y="2" Width="5.75" />
     <TypeIdentifier>
-      <HashCode>JBAChDAAbAOQACAADgEgAABAIHBAAIGAgoCGREIAnok=</HashCode>
+      <HashCode>JDhYABQAyGiwAAAADgEgCKAgAOBwBAGAHISGQDIAjoM=</HashCode>
       <FileName>MainWindow.xaml.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="sudokuGame" />
     </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PR283_Assignment_2.SudokuCreation6x6">
+    <Position X="8.25" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SudokuCreation6x6.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PR283_Assignment_2.SudokuCreation4x4">
+    <Position X="8.25" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SudokuCreation4x4.cs</FileName>
+    </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />

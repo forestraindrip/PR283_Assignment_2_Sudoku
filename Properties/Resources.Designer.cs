@@ -97,6 +97,24 @@ namespace PR283_Assignment_2.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Drag and drop a cell to here to get hint.
+        /// </summary>
+        public static string GetHintTextBlockMsg {
+            get {
+                return ResourceManager.GetString("GetHintTextBlockMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Load.
         /// </summary>
         public static string Load {
@@ -111,6 +129,15 @@ namespace PR283_Assignment_2.Properties {
         public static string Nine {
             get {
                 return ResourceManager.GetString("Nine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It Is Not A Valid Value.
+        /// </summary>
+        public static string NotAValidValue {
+            get {
+                return ResourceManager.GetString("NotAValidValue", resourceCulture);
             }
         }
         
@@ -169,6 +196,15 @@ namespace PR283_Assignment_2.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        public static string Start {
+            get {
+                return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 3.
         /// </summary>
         public static string Three {
@@ -205,7 +241,16 @@ namespace PR283_Assignment_2.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0.
+        ///   Looks up a localized string similar to You Win!.
+        /// </summary>
+        public static string YouWin {
+            get {
+                return ResourceManager.GetString("YouWin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string Zero {
             get {
