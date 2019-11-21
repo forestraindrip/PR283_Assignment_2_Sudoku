@@ -3,7 +3,7 @@
   <Class Name="MarcusJ.SudokuGame">
     <Position X="7.75" Y="2" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>UAAEAABACBARVIAgIIAAAAVIIEJAACgAgIAWAIBAFJg=</HashCode>
+      <HashCode>UAAEAABACBARVIAgIIgAIAVIIEJAACgAgIAWAIBAFJg=</HashCode>
       <FileName>Model\SudokuGame.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -25,7 +25,7 @@
   <Class Name="MarcusJ.Grid">
     <Position X="12" Y="2" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AEACAAFAgIAACAARcAAAAAAAAAAIAKAAAAAACAAAAwA=</HashCode>
+      <HashCode>AEACAAFAgIAASIARcAACAAAAAAAIAKAAAAAgCAAAAwA=</HashCode>
       <FileName>Model\Grid.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -33,12 +33,13 @@
   <Class Name="PR283_Assignment_2.MainWindow">
     <Position X="0.5" Y="2" Width="5.75" />
     <TypeIdentifier>
-      <HashCode>JDhYABUAyEiwAAAABgEgCKAAIOBQAAHAHICGQAIAjoM=</HashCode>
+      <HashCode>JDhYABQAyEiwAAAADgEgCKAgIOBQAAHAHICGQAIAjoM=</HashCode>
       <FileName>MainWindow.xaml.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="sudokuGame" />
     </ShowAsAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

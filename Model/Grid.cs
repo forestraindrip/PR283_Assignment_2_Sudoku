@@ -13,6 +13,12 @@ namespace MarcusJ
         protected int[] myCells;
         protected IndexGetter indexGetter;
 
+        public int MaxValue { get => maxValue; }
+        public int SquareHeight { get => squareHeight; }
+        public int SquareWidth { get => squareWidth; }
+        public int[] MyCells { get => myCells; }
+
+
         public Grid(int maxValue, int squareHeight, int squareWidth)
         {
             this.maxValue = maxValue;

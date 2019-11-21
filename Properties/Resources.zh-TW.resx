@@ -129,11 +129,20 @@
   <data name="Four" xml:space="preserve">
     <value>四</value>
   </data>
+  <data name="GetHintTextBlockMsg" xml:space="preserve">
+    <value>拖拉一個格子到這裡來獲得提示</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>語言</value>
+  </data>
   <data name="Load" xml:space="preserve">
     <value>載入</value>
   </data>
   <data name="Nine" xml:space="preserve">
     <value>九</value>
+  </data>
+  <data name="NotAValidValue" xml:space="preserve">
+    <value>不合法的數字</value>
   </data>
   <data name="One" xml:space="preserve">
     <value>一</value>
@@ -167,6 +176,9 @@
   </data>
   <data name="Two" xml:space="preserve">
     <value>二</value>
+  </data>
+  <data name="YouWin" xml:space="preserve">
+    <value>你贏了!</value>
   </data>
   <data name="Zero" xml:space="preserve">
     <value />

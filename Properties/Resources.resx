@@ -129,11 +129,20 @@
   <data name="Four" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="GetHintTextBlockMsg" xml:space="preserve">
+    <value>Drag and drop a cell to here to get hint</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
   <data name="Load" xml:space="preserve">
     <value>Load</value>
   </data>
   <data name="Nine" xml:space="preserve">
     <value>9</value>
+  </data>
+  <data name="NotAValidValue" xml:space="preserve">
+    <value>It Is Not A Valid Value</value>
   </data>
   <data name="One" xml:space="preserve">
     <value>1</value>
@@ -167,6 +176,9 @@
   </data>
   <data name="Two" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="YouWin" xml:space="preserve">
+    <value>You Win!</value>
   </data>
   <data name="Zero" xml:space="preserve">
     <value />

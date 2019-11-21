@@ -17,7 +17,7 @@ namespace MarcusJ
         private int squaresPerRow;
         protected StreamReader myReader;
         protected StreamWriter myWriter;
-        protected string gridCSVString;
+        private string gridCSVString;
         protected int[] solution;
         private IndexGetter indexGetter;
         private Validator validator;
@@ -26,6 +26,9 @@ namespace MarcusJ
         public int SquaresPerRow { get => squaresPerRow; }
         public IndexGetter IndexGetter { get => indexGetter; }
         public Validator Validator { get => validator; }
+        public string GridCSVString { get => gridCSVString; set => gridCSVString = value; }
+        public Grid MyGrid { get => myGrid; set => myGrid = value; }
+        public int[] Solution { get => solution; set => solution = value; }
 
         public SudokuGame(string gridFilePath, string solutionFilePath)
         {
@@ -36,6 +39,11 @@ namespace MarcusJ
             string solutionString = LoadFile(solutionFilePath);
             solution = ConvertCSVToArray(solutionString);
 
+        }
+        public SudokuGame(Validator validator, IndexGetter indexGetter)
+        {
+            this.validator = validator;
+            this.indexGetter = indexGetter;
         }
 
         public int GetMaxValue()
@@ -57,7 +65,10 @@ namespace MarcusJ
         // Set array values to Grid
         public void Set(int[] cellValues)
         {
-            myGrid = new Grid(maxValue, SquaresPerColumn, SquaresPerRow);
+            if (myGrid == null)
+            {
+                myGrid = new Grid(maxValue, SquaresPerColumn, SquaresPerRow);
+            }
             for (int index = 0; index < cellValues.Length; index++)
             {
                 int value = cellValues[index];
@@ -125,7 +136,10 @@ namespace MarcusJ
 
         public void SetCell(int value, int gridIndex)
         {
-            indexGetter = new IndexGetter(maxValue, SquaresPerColumn, SquaresPerRow);
+            if (indexGetter == null)
+            {
+                indexGetter = new IndexGetter(maxValue, SquaresPerColumn, SquaresPerRow);
+            }
             int columnIndex = IndexGetter.GetColumnIndex(gridIndex);
             int rowIndex = IndexGetter.GetRowIndex(gridIndex);
             try
@@ -205,7 +219,7 @@ namespace MarcusJ
         // 4.	The game can reset the game to the initial state
         public void Reset()
         {
-            FromCSV(gridCSVString);
+            FromCSV(GridCSVString);
         }
 
         // 21.	The game can check whether the player has won the game
