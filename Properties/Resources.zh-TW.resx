@@ -129,6 +129,9 @@
   <data name="Four" xml:space="preserve">
     <value>四</value>
   </data>
+  <data name="GameTitle" xml:space="preserve">
+    <value>數獨遊戲</value>
+  </data>
   <data name="GetHintTextBlockMsg" xml:space="preserve">
     <value>拖拉一個格子到這裡來獲得提示</value>
   </data>

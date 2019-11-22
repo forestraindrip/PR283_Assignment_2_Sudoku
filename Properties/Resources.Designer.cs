@@ -97,6 +97,15 @@ namespace PR283_Assignment_2.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sudoku Game.
+        /// </summary>
+        public static string GameTitle {
+            get {
+                return ResourceManager.GetString("GameTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Drag and drop a cell to here to get hint.
         /// </summary>
         public static string GetHintTextBlockMsg {
