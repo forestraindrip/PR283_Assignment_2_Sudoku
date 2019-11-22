@@ -97,6 +97,19 @@ namespace PR283_Assignment_2.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Game Manual:
+        ///1. Drag an input button and drop it onto any cell in the grid to input a number
+        ///2. Drag a grid cell and drop it onto any input button to empty the value in the cell
+        ///3. The values in the predefine cell cannot be modified
+        ///4. Drag a grid cell and drop it onto hint area to get the possible values for the cell.
+        /// </summary>
+        public static string GameManual {
+            get {
+                return ResourceManager.GetString("GameManual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sudoku Game.
         /// </summary>
         public static string GameTitle {

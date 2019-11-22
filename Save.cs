@@ -4,31 +4,31 @@ namespace PR283_Assignment_2
 {
     internal class Save
     {
-        public int MaxValue;
-        public int SquareHeight;
-        public int SquareWidth;
-        public int[] MyCells;
-        public int[] Solution;
-        public int SquaresPerColumn;
-        public int SquaresPerRow;
-        public string GridCSVString;
-        public int MoveCount;
-        public TimeSpan TimeSpan;
-        public DateTime EndTime;
+        public int maxValue;
+        public int squareHeight;
+        public int squareWidth;
+        public int[] myCells;
+        public int[] solution;
+        public int squaresPerColumn;
+        public int squaresPerRow;
+        public string gridCSVString;
+        public int moveCount;
+        public TimeSpan timeSpan;
+        public DateTime endTime;
 
         public void SaveState(MainWindow main)
         {
-            MaxValue = main.SudokuGame.GetMaxValue();
-            SquareHeight = main.SudokuGame.MyGrid.SquareHeight;
-            SquareWidth = main.SudokuGame.MyGrid.SquareWidth;
-            MyCells = main.SudokuGame.MyGrid.MyCells;
-            Solution = main.SudokuGame.Solution;
-            SquaresPerColumn = main.SudokuGame.SquaresPerColumn;
-            SquaresPerRow = main.SudokuGame.SquaresPerRow;
-            GridCSVString = main.SudokuGame.GridCSVString;
-            MoveCount = main.MoveCount;
-            TimeSpan = main.TimeSpan;
-            EndTime = DateTime.Now;
+            maxValue = main.SudokuGame.GetMaxValue();
+            squareHeight = main.SudokuGame.MyGrid.SquareHeight;
+            squareWidth = main.SudokuGame.MyGrid.SquareWidth;
+            myCells = main.SudokuGame.MyGrid.MyCells;
+            solution = main.SudokuGame.Solution;
+            squaresPerColumn = main.SudokuGame.SquaresPerColumn;
+            squaresPerRow = main.SudokuGame.SquaresPerRow;
+            gridCSVString = main.SudokuGame.GridCSVString;
+            moveCount = main.MoveCount;
+            timeSpan = main.TimeSpan;
+            endTime = DateTime.Now;
         }
 
     }

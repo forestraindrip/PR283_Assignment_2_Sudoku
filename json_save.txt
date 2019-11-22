@@ -1,0 +1,1 @@
+{"maxValue":4,"squareHeight":2,"squareWidth":2,"myCells":[2,0,0,3,0,0,2,0,0,1,0,0,4,2,3,1],"solution":[2,4,1,3,1,3,2,4,3,1,4,2,4,2,3,1],"squaresPerColumn":2,"squaresPerRow":2,"gridCSVString":"2,0,0,3,0,0,2,0,0,1,0,0,4,0,0,1","moveCount":2,"timeSpan":"00:00:13","endTime":"2019-11-23T00:03:15.5661609+13:00"}

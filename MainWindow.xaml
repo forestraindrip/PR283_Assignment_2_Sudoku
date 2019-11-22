@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="{x:Static p:Resources.GameTitle}" Width="660" Height="600" ResizeMode="NoResize">
 
-    <Grid x:Name="MainGrid" Margin="10,10,10,10">
+    <Grid x:Name="MainGrid" Margin="0,0,0,0" Background="#FFC3DEFF">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
@@ -21,47 +21,47 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid Margin="0,49,-0.4,0.2" Height="50" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <Label x:Name="TimerLabel"  Width="50" Margin="95,0,0,0" Content="{x:Static p:Resources.Timer}" HorizontalAlignment="Left" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <Label x:Name="TimerFigureLabel"  Content=""  HorizontalAlignment="Left" Margin="155,0,0,0" Width="138" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Grid Margin="10,5,10,5" Grid.ColumnSpan="2" Background="#FFFFF2B5" Grid.Row="1">
+            <Label x:Name="TimerLabel"  Width="58" Margin="132,0,0,-0.4" Content="{x:Static p:Resources.Timer}" HorizontalAlignment="Left" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="TimerFigureLabel"  Content=""  HorizontalAlignment="Left" Margin="193,0,0,-0.4" Width="130" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label x:Name="ScoreLabel" 
-                   Content="{x:Static p:Resources.Score}"  Margin="326,0,0,0" Width="50" HorizontalAlignment="Left" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <Label x:Name="ScoreFigureLabel" Content="" HorizontalAlignment="Left" Margin="396,0,0,0" Width="100" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                   Content="{x:Static p:Resources.Score}"  Margin="345,0,0,-0.4" Width="55" HorizontalAlignment="Left" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="ScoreFigureLabel" Content="" HorizontalAlignment="Left" Margin="403,0,0,-0.4" Width="80" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </Grid>
-        <Menu  Grid.Row="0" Grid.ColumnSpan="2" x:Name="MainMenu" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Center" Margin="0,0,-0.4,0" Grid.RowSpan="2" >
-            <ComboBox x:Name="GridSizeComboxBox" Height="50" Width="65" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectedIndex="0">
+        <Menu  Grid.Row="0" Grid.ColumnSpan="2" x:Name="MainMenu" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Center" Margin="0,0,-0.4,0" Grid.RowSpan="2" Background="#FFC3DEFF" >
+            <ComboBox x:Name="GridSizeComboxBox" Height="50" Width="65" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectedIndex="0" FontSize="14">
                 <ComboBoxItem Content="4x4" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <ComboBoxItem Content="6x6" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             </ComboBox>
             <Button x:Name="StartButton4x4" Content="{x:Static p:Resources.Start}" Height="50" Width="60" 
-ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Click="StartButton_Click" CommandParameter="4"/>
+ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Click="StartButton_Click" CommandParameter="4" FontSize="14"/>
 
-            <Button x:Name="LoadButton" Content="{x:Static p:Resources.Load}" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Click="LoadButton_Click"/>
-            <Button x:Name="SaveButton" Content="{x:Static p:Resources.Save}" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="SaveButton_Click"/>
-            <Button x:Name="RestartButton" Content="{x:Static p:Resources.Restart}" Height="50" Width="60" Click="RestartButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Label x:Name="LanguageSelectLabel" Content="{x:Static p:Resources.Language}" Height="50" Width="65" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-            <ComboBox x:Name="LanguageComboBox" Width="120" Height="50" SelectionChanged="LanguageComboBox_SelectionChanged" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectedIndex="-1">
-                <ComboBoxItem x:Name="EnglishLanguageButton" Width="120" Content="{x:Static p:Resources.English}" HorizontalAlignment="Center" VerticalAlignment="Center" Tag="en-US"/>
-                <ComboBoxItem x:Name="TraditionalChineseLanguageButton" Width="120" Content="{x:Static p:Resources.TraditionalChinese}" HorizontalAlignment="Center" VerticalAlignment="Center" Tag="zh-TW"/>
+            <Button x:Name="LoadButton" Content="{x:Static p:Resources.Load}" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Click="LoadButton_Click" FontSize="14"/>
+            <Button x:Name="SaveButton" Content="{x:Static p:Resources.Save}" Height="50" Width="60" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="SaveButton_Click" FontSize="14"/>
+            <Button x:Name="RestartButton" Content="{x:Static p:Resources.Restart}" Height="50" Width="60" Click="RestartButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"/>
+            <Label x:Name="LanguageSelectLabel" Content="{x:Static p:Resources.Language}" Height="50" Width="80" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="14"/>
+            <ComboBox x:Name="LanguageComboBox" Width="140" Height="50" SelectionChanged="LanguageComboBox_SelectionChanged" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectedIndex="-1" FontSize="14">
+                <ComboBoxItem x:Name="EnglishLanguageButton" Width="140" Content="{x:Static p:Resources.English}" HorizontalAlignment="Center" VerticalAlignment="Center" Tag="en-US"/>
+                <ComboBoxItem x:Name="TraditionalChineseLanguageButton" Width="140" Content="{x:Static p:Resources.TraditionalChinese}" HorizontalAlignment="Center" VerticalAlignment="Center" Tag="zh-TW"/>
             </ComboBox>
 
 
         </Menu>
-        <Grid x:Name="DynamicGrid" Margin="10,10.8,0,10.8"  Background="#FFEAFCFF" Height="360" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Width="360" Grid.RowSpan="2"/>
+        <Grid x:Name="DynamicGrid" Margin="10,00,10,10"  Background="#FFEAFCFF" Height="360" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Width="360" Grid.RowSpan="2"/>
         <StackPanel x:Name="InputButtonStackPanel" Height="70" Margin="0,0,-0.4,0.2" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.Row="4" Grid.ColumnSpan="2" Drop="InputButtonStackPanel_Drop" AllowDrop="True" >
             <Button x:Name="InputButton1" Content="{x:Static p:Resources.One}" Height="50" Width="50" Margin="10,5,10,5"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown" 
-              CommandParameter="1"/>
-            <Button x:Name="InputButton2" Content="{x:Static p:Resources.Two}" Height="50" Width="50" Margin="10,5,10,5"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown"               CommandParameter="2"/>
-            <Button x:Name="InputButton3" Content="{x:Static p:Resources.Three}" Height="50" Width="50" Margin="10,5,10,5"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown"               CommandParameter="3"/>
-            <Button x:Name="InputButton4" Content="{x:Static p:Resources.Four}" Height="50" Width="50" Margin="10,5,10,5"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown"               CommandParameter="4"/>
-            <Button x:Name="InputButton5" Content="{x:Static p:Resources.Five}" Height="50" Width="50" Margin="10,5,10,5"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown"               CommandParameter="5"/>
-            <Button x:Name="InputButton6" Content="{x:Static p:Resources.Six}" Height="50" Width="50" Margin="10,5,10,5"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown"               CommandParameter="6"/>
-            <Button x:Name="InputButton7" Content="{x:Static p:Resources.Seven}" Height="50" Width="50" Margin="10,5,10,5"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown"               CommandParameter="7"/>
-            <Button x:Name="InputButton8" Content="{x:Static p:Resources.Eight}" Height="50" Width="50" Margin="10,5,10,5"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown"               CommandParameter="8"/>
-            <Button x:Name="InputButton9" Content="{x:Static p:Resources.Nine}" Height="50" Width="50" Margin="10,5,10,5"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown"               CommandParameter="9"/>
+              CommandParameter="1" Background="#FFFFF7D0" FontSize="18"/>
+            <Button x:Name="InputButton2" Content="{x:Static p:Resources.Two}" Height="50" Width="50" Margin="10,5,10,5"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown"               CommandParameter="2" Background="#FFFFF7D0" FontSize="18"/>
+            <Button x:Name="InputButton3" Content="{x:Static p:Resources.Three}" Height="50" Width="50" Margin="10,5,10,5"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown"               CommandParameter="3" Background="#FFFFF7D0" FontSize="18"/>
+            <Button x:Name="InputButton4" Content="{x:Static p:Resources.Four}" Height="50" Width="50" Margin="10,5,10,5"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown"               CommandParameter="4" Background="#FFFFF7D0" FontSize="18"/>
+            <Button x:Name="InputButton5" Content="{x:Static p:Resources.Five}" Height="50" Width="50" Margin="10,5,10,5"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown"               CommandParameter="5" Background="#FFFFF7D0" FontSize="18"/>
+            <Button x:Name="InputButton6" Content="{x:Static p:Resources.Six}" Height="50" Width="50" Margin="10,5,10,5"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown"               CommandParameter="6" Background="#FFFFF7D0" FontSize="18"/>
+            <Button x:Name="InputButton7" Content="{x:Static p:Resources.Seven}" Height="50" Width="50" Margin="10,5,10,5"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown"               CommandParameter="7" Background="#FFFFF7D0" FontSize="18"/>
+            <Button x:Name="InputButton8" Content="{x:Static p:Resources.Eight}" Height="50" Width="50" Margin="10,5,10,5"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown"               CommandParameter="8" Background="#FFFFF7D0" FontSize="18"/>
+            <Button x:Name="InputButton9" Content="{x:Static p:Resources.Nine}" Height="50" Width="50" Margin="10,5,10,5"  Cursor="Hand" PreviewMouseLeftButtonDown="Button_MouseButtonDown"               CommandParameter="9" Background="#FFFFF7D0" FontSize="18"/>
         </StackPanel>
-        <ScrollViewer x:Name="TextScrollViewer" Grid.Column="1" Margin="10" Grid.Row="2" Background="#FFFFF8DF" VerticalScrollBarVisibility="Auto" CanContentScroll="True" FontSize="20" MaxHeight="300"/>
-        <TextBlock x:Name="GetHintTextBlock" Text="{x:Static p:Resources.GetHintTextBlockMsg}" Grid.Column="1" Margin="12.4,10.6,9.6,9.8" Grid.Row="3" FontSize="18" TextWrapping="Wrap" TextAlignment="Center" AllowDrop="True" Background="#FFF7A9A9" Drop="GetHintTextBlock_Drop"/>
+        <ScrollViewer x:Name="TextScrollViewer" Grid.Column="1" Margin="10" Grid.Row="2" Background="#FFFFF2B5" VerticalScrollBarVisibility="Auto" CanContentScroll="True" FontSize="20" MaxHeight="300"/>
+        <TextBlock x:Name="GetHintTextBlock" Text="{x:Static p:Resources.GetHintTextBlockMsg}" Grid.Column="1" Margin="10,0,10,10" Grid.Row="3" FontSize="18" TextWrapping="Wrap" TextAlignment="Center" AllowDrop="True" Background="#FFF7A9A9" Drop="GetHintTextBlock_Drop"/>
 
 
     </Grid>

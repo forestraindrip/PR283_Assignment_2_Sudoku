@@ -68,6 +68,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="PartialMainWindowEventHandler.cs" />
     <Compile Include="Save.cs" />
     <Compile Include="SudokuCreation4x4.cs" />
     <Compile Include="SudokuCreation6x6.cs" />

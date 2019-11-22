@@ -129,6 +129,13 @@
   <data name="Four" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="GameManual" xml:space="preserve">
+    <value>Game Manual:
+1. Drag an input button and drop it onto any cell in the grid to input a number
+2. Drag a grid cell and drop it onto any input button to empty the value in the cell
+3. The values in the predefine cell cannot be modified
+4. Drag a grid cell and drop it onto hint area to get the possible values for the cell</value>
+  </data>
   <data name="GameTitle" xml:space="preserve">
     <value>Sudoku Game</value>
   </data>
