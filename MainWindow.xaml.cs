@@ -102,9 +102,12 @@ namespace PR283_Assignment_2
             DynamicGrid.ColumnDefinitions.Clear();
 
             SetupSquareGrid();
-
             myGridButtons.Clear();
             PopulateInputButtons();
+
+            TextScrollViewer.Content = "";
+            TextScrollViewer.MaxHeight = DynamicGrid.Height - 50 - 20;
+
             UpdateGameStatus();
         }
 
@@ -187,7 +190,6 @@ namespace PR283_Assignment_2
             }
 
 
-            //button.Drop += new DragEventHandler (GridButton_Drop);
             return button;
         }
 
@@ -376,11 +378,9 @@ namespace PR283_Assignment_2
             }
         }
 
-
         private void SetUILanguage(string languageCode)
         {
             // https://www.tutorialspoint.com/wpf/wpf_localization.htm
-
 
             if (languageCode != currentLanguage)
             {
@@ -466,12 +466,12 @@ namespace PR283_Assignment_2
                     }
                     catch (IsNotValidValueException exception)
                     {
-                        AddMessageToMessageBoard("Is Not A Valid Value");
+                        AddMessageToMessageBoard(Properties.Resources.NotAValidValue);
                     }
                     MoveCount++;
                     UpdateButtonContent(value, button);
                 }
-                else { AddMessageToMessageBoard("Is Not A Valid Value"); }
+                else { AddMessageToMessageBoard(Properties.Resources.NotAValidValue); ; }
 
                 UpdateGameStatus();
 
@@ -490,7 +490,6 @@ namespace PR283_Assignment_2
 
         private void RestartButton_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Restart game
             RestartGame();
         }
 
@@ -541,10 +540,10 @@ namespace PR283_Assignment_2
                 int index = Int32.Parse(indexString);
 
                 List<int> validValues = sudokuGame.GetValidValues(index);
-                string message = "There is no possible value";
+                string message = Properties.Resources.ThereIsNoPossibleValue;
                 if (validValues.Count > 0)
                 {
-                    message = "Potential values: ";
+                    message = Properties.Resources.PotentialValues;
                     validValues.ForEach(v => message += " " + v);
                 }
                 AddMessageToMessageBoard(message);

@@ -150,6 +150,9 @@
   <data name="One" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="PotentialValues" xml:space="preserve">
+    <value>Potential values: </value>
+  </data>
   <data name="Restart" xml:space="preserve">
     <value>Restart</value>
   </data>
@@ -167,6 +170,9 @@
   </data>
   <data name="Start" xml:space="preserve">
     <value>Start</value>
+  </data>
+  <data name="ThereIsNoPossibleValue" xml:space="preserve">
+    <value>There is no possible value</value>
   </data>
   <data name="Three" xml:space="preserve">
     <value>3</value>

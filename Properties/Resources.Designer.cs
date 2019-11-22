@@ -160,6 +160,15 @@ namespace PR283_Assignment_2.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Potential values: .
+        /// </summary>
+        public static string PotentialValues {
+            get {
+                return ResourceManager.GetString("PotentialValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Restart.
         /// </summary>
         public static string Restart {
@@ -210,6 +219,15 @@ namespace PR283_Assignment_2.Properties {
         public static string Start {
             get {
                 return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is no possible value.
+        /// </summary>
+        public static string ThereIsNoPossibleValue {
+            get {
+                return ResourceManager.GetString("ThereIsNoPossibleValue", resourceCulture);
             }
         }
         

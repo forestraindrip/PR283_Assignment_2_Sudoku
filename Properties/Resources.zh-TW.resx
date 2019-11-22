@@ -150,6 +150,9 @@
   <data name="One" xml:space="preserve">
     <value>一</value>
   </data>
+  <data name="PotentialValues" xml:space="preserve">
+    <value>可能的數字: </value>
+  </data>
   <data name="Restart" xml:space="preserve">
     <value>重新開始</value>
   </data>
@@ -167,6 +170,9 @@
   </data>
   <data name="Start" xml:space="preserve">
     <value>開始</value>
+  </data>
+  <data name="ThereIsNoPossibleValue" xml:space="preserve">
+    <value>沒有合適的數字</value>
   </data>
   <data name="Three" xml:space="preserve">
     <value>三</value>

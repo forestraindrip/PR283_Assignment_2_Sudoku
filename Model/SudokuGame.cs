@@ -195,7 +195,6 @@ namespace MarcusJ
 
         private string LoadFile(string filePath)
         {
-            // TODO: NEED TO DELETE
             try
             {
                 myReader = new StreamReader(filePath);
