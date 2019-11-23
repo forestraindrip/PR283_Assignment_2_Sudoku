@@ -33,8 +33,7 @@ namespace PR283_Assignment_2
 
         protected int gridWidth;
         protected int gridHeight;
-
-
+        
         protected StreamWriter streamWriter;
         protected StreamReader streamReader;
 
@@ -44,7 +43,6 @@ namespace PR283_Assignment_2
         // https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.brushes?view=netframework-4.8
         protected Brush defaultButtonColor = Brushes.LightYellow;
         protected Brush variedButtonColor = Brushes.LightSkyBlue;
-
 
         protected Button trackedButton;
         private TimeSpan timeSpan;
@@ -58,7 +56,7 @@ namespace PR283_Assignment_2
         protected DateTime startTime;
         protected List<Button> myGridButtons = new List<Button>();
 
-        Dictionary<int, SudokuCreationStrategy> creationStrategies = new Dictionary<int, SudokuCreationStrategy>() { { 4, new SudokuCreation4x4() }, { 6, new SudokuCreation6x6() } };
+        Dictionary<int, ISudokuCreationStrategy> creationStrategies = new Dictionary<int, ISudokuCreationStrategy>() { { 4, new SudokuCreation4x4() }, { 6, new SudokuCreation6x6() } };
         protected Dictionary<int, string> numberDictionary = new Dictionary<int, string>()
         {
             {1,"One" },
@@ -87,6 +85,7 @@ namespace PR283_Assignment_2
             currentLanguage = Thread.CurrentThread.CurrentUICulture.ToString();
 
         }
+
         private void SetupTimer()
         {
 

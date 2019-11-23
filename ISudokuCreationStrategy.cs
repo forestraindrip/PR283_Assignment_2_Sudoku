@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PR283_Assignment_2
 {
-    interface SudokuCreationStrategy
+    interface ISudokuCreationStrategy
     {
         ISudokuGame CreateSudokuGame();
     }

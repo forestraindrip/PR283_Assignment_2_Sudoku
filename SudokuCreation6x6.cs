@@ -6,7 +6,7 @@ using MarcusJ;
 
 namespace PR283_Assignment_2
 {
-    public class SudokuCreation6x6 : SudokuCreationStrategy
+    public class SudokuCreation6x6 : ISudokuCreationStrategy
     {
         public ISudokuGame CreateSudokuGame()
         {

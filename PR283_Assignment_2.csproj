@@ -72,7 +72,7 @@
     <Compile Include="Save.cs" />
     <Compile Include="SudokuCreation4x4.cs" />
     <Compile Include="SudokuCreation6x6.cs" />
-    <Compile Include="SudokuCreationStrategy.cs" />
+    <Compile Include="ISudokuCreationStrategy.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

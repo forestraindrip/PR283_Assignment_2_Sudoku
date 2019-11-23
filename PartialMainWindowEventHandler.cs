@@ -54,7 +54,7 @@ namespace PR283_Assignment_2
 
                 int value = Convert.ToInt32(e.Data.GetData("value").ToString());
 
-                if (0 <= value && value <= maxSquareValue)
+                if ((0 <= value) && (value <= maxSquareValue))
                 {
                     try
                     {
@@ -67,7 +67,7 @@ namespace PR283_Assignment_2
                     MoveCount++;
                     UpdateButtonContent(value, button);
                 }
-                else { AddMessageToMessageBoard(Properties.Resources.NotAValidValue); ; }
+                else { AddMessageToMessageBoard(Properties.Resources.NotAValidValue);  }
 
                 UpdateGameStatus();
 
