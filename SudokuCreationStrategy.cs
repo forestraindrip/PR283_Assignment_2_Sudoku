@@ -9,6 +9,6 @@ namespace PR283_Assignment_2
 {
     interface SudokuCreationStrategy
     {
-        SudokuGame CreateSudokuGame();
+        ISudokuGame CreateSudokuGame();
     }
 }

@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="MarcusJ.SudokuGame">
-    <Position X="19.25" Y="4.5" Width="4" />
+    <Position X="16.5" Y="4.5" Width="4" />
     <TypeIdentifier>
-      <HashCode>UAAEABBACBARVIAgIIgAIAVIIEJAACgAgIAWAIBAFJg=</HashCode>
+      <HashCode>UAAEABBACBARVIAgIIgCIAVIIEJAACgAgIAWAIBAFJg=</HashCode>
       <FileName>Model\SudokuGame.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -14,21 +14,21 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MarcusJ.Validator">
-    <Position X="19.25" Y="15.5" Width="3.5" />
+    <Position X="16.75" Y="15.5" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAQAgAAAAAAAAAAJAAGAAAAAAAAAAAIA=</HashCode>
       <FileName>Model\Validator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MarcusJ.IndexGetter">
-    <Position X="24.75" Y="12" Width="4" />
+    <Position X="22" Y="12" Width="4" />
     <TypeIdentifier>
       <HashCode>AAACCAAAAAAAAAAAAAAAAAAAAAAQAKAQAAAAAAACAAI=</HashCode>
       <FileName>Model\IndexGetter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PR283_Assignment_2.MainWindow">
-    <Position X="11.5" Y="4.5" Width="5.75" />
+    <Position X="8.75" Y="4.5" Width="5.75" />
     <TypeIdentifier>
       <HashCode>pDhYABQCyGiwAAAADgEgCKAgAOBQBAGAHIQGQjIAjoM=</HashCode>
       <FileName>MainWindow.xaml.cs</FileName>
@@ -41,24 +41,8 @@
     </ShowAsCollectionAssociation>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="PR283_Assignment_2.SudokuCreation6x6" BaseTypeListCollapsed="true">
-    <Position X="4" Y="10.75" Width="2.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>SudokuCreation6x6.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
-  </Class>
-  <Class Name="PR283_Assignment_2.SudokuCreation4x4" BaseTypeListCollapsed="true">
-    <Position X="7" Y="10.75" Width="2.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>SudokuCreation4x4.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
-  </Class>
   <Class Name="MarcusJ.Grid">
-    <Position X="24.75" Y="4.5" Width="4.5" />
+    <Position X="22" Y="4.5" Width="4.5" />
     <TypeIdentifier>
       <HashCode>AEACAAFAgIAASIARcAACAAAAAAAIAKAAAAAgCAAAAwA=</HashCode>
       <FileName>Model\Grid.cs</FileName>
@@ -68,67 +52,90 @@
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
+  <Class Name="PR283_Assignment_2.Save">
+    <Position X="3.25" Y="14.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>IgACAABAAAAQAAAAAAAAACAIIAAABKAAAAAAAAAAEAA=</HashCode>
+      <FileName>Save.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PR283_Assignment_2.SudokuCreation6x6">
+    <Position X="4.5" Y="10.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SudokuCreation6x6.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PR283_Assignment_2.SudokuCreation4x4">
+    <Position X="1.25" Y="10.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SudokuCreation4x4.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
   <Interface Name="PR283_Assignment_2.SudokuCreationStrategy">
-    <Position X="5.75" Y="9.25" Width="2.5" />
+    <Position X="3" Y="9.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SudokuCreationStrategy.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="MarcusJ.IValuesGetter" Collapsed="true">
-    <Position X="27" Y="3" Width="1.5" />
+    <Position X="24.25" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAAAAAAAAAAABIAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
       <FileName>Interface\IValuesGetter.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="MarcusJ.ICompleteChecker" Collapsed="true">
-    <Position X="27" Y="2.25" Width="1.5" />
+    <Position X="24.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAEAAAAAAAAAQAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
       <FileName>Interface\ICompleteChecker.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="MarcusJ.ISet" Collapsed="true">
-    <Position X="25" Y="2.25" Width="1.5" />
+    <Position X="22.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAAAQAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Interface\ISet.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="MarcusJ.IGet" Collapsed="true">
-    <Position X="25" Y="3" Width="1.5" />
+    <Position X="22.25" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAgAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
       <FileName>Interface\IGet.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="MarcusJ.ISudokuGame">
-    <Position X="20.25" Y="1.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAABFAAAAAAAAAAAAAJAAAAAAAACAAAAAIA=</HashCode>
-      <FileName>Interface\ISudokuGame.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
   <Interface Name="MarcusJ.IGame" Collapsed="true">
-    <Position X="18.25" Y="0.5" Width="1.5" />
+    <Position X="15.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAAAAAAABAAAAIAAAAEAAAAAAAgAAAAAAABAAAg=</HashCode>
       <FileName>Interface\IGame.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="MarcusJ.ISerialize" Collapsed="true">
-    <Position X="22.25" Y="0.5" Width="1.5" />
+    <Position X="19.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAAEAAAAABAAAAAAAAAAAABAAAAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>Interface\ISerialize.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="MarcusJ.IGridFile" Collapsed="true">
-    <Position X="20.25" Y="0.5" Width="1.5" />
+    <Position X="17.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAEAAAAAAAAAEAAAAAAA=</HashCode>
       <FileName>Interface\IGridFile.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MarcusJ.ISudokuGame">
+    <Position X="17.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABFAAAAAAAAAAAAAJAAAAAAAACAAAAAIA=</HashCode>
+      <FileName>Interface\ISudokuGame.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

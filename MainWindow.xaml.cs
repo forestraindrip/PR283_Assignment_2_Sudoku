@@ -49,7 +49,7 @@ namespace PR283_Assignment_2
         protected Button trackedButton;
         private TimeSpan timeSpan;
 
-        protected SudokuGame sudokuGame;
+        protected ISudokuGame sudokuGame;
         protected int dragedValue;
         protected string currentLanguage;
         protected int maxSquareValue = -1;
@@ -74,7 +74,7 @@ namespace PR283_Assignment_2
         };
         private int moveCount;
 
-        public SudokuGame SudokuGame { get => sudokuGame; }
+        public ISudokuGame SudokuGame { get => sudokuGame; }
         public int MoveCount { get => moveCount; set => moveCount = value; }
         public TimeSpan TimeSpan { get => timeSpan; set => timeSpan = value; }
 
@@ -291,7 +291,7 @@ namespace PR283_Assignment_2
             newSudokuGame.MyGrid = newGrid;
 
             newSudokuGame.Set(save.myCells);
-            newSudokuGame.Solution = save.solution;
+            newSudokuGame.SetSolution(save.solution);
             newSudokuGame.SetMaxValue(save.maxValue);
             newSudokuGame.SetSquarePerRow(save.squaresPerRow);
             newSudokuGame.SetSquaresPerColumn(save.squaresPerColumn);

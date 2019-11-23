@@ -8,7 +8,7 @@ namespace PR283_Assignment_2
 {
     public class SudokuCreation6x6 : SudokuCreationStrategy
     {
-        public SudokuGame CreateSudokuGame()
+        public ISudokuGame CreateSudokuGame()
         {
             return new SudokuGame("..\\grid6x6.csv", "..\\solution6x6.csv");
         }

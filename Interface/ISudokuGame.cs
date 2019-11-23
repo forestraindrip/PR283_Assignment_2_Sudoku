@@ -20,5 +20,16 @@ namespace MarcusJ
         bool IsValidColumn(int gridIndex);
         bool IsValidRow(int gridIndex);
         bool IsValidSquare(int gridIndex);
+
+        List<int> GetValidValues(int cellIndex);
+
+        int[] GetSolution();
+        int GetSquaresPerColumn();
+        int GetSquaresPerRow();
+        string GetGridCSVString();
+        int GetSquareHeight();
+        int GetSquareWidth();
+        int[] GetCells();
+
     }
 }

@@ -28,7 +28,14 @@ namespace MarcusJ
         public Validator Validator { get => validator; }
         public string GridCSVString { get => gridCSVString; set => gridCSVString = value; }
         public Grid MyGrid { get => myGrid; set => myGrid = value; }
-        public int[] Solution { get => solution; set => solution = value; }
+
+        public void SetSolution(int[] solution)
+        {
+            this.solution = solution;
+        }
+
+
+
 
         public SudokuGame(string gridFilePath, string solutionFilePath)
         {
@@ -273,5 +280,39 @@ namespace MarcusJ
             return myGrid.GetValidValues(cellIndex);
         }
 
+        public int[] GetSolution()
+        {
+            return solution;
+        }
+
+        public int GetSquaresPerColumn()
+        {
+            return SquaresPerColumn;
+        }
+
+        public int GetSquaresPerRow()
+        {
+            return SquaresPerRow;
+        }
+
+        public string GetGridCSVString()
+        {
+            return GridCSVString;
+        }
+
+        public int GetSquareHeight()
+        {
+           return this.MyGrid.SquareHeight;
+        }
+
+        public int GetSquareWidth()
+        {
+            return this.MyGrid.SquareWidth;
+        }
+
+        public int[] GetCells()
+        {
+            return this.MyGrid.MyCells;
+        }
     }
 }

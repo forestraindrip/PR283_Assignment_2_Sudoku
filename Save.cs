@@ -19,13 +19,14 @@ namespace PR283_Assignment_2
         public void SaveState(MainWindow main)
         {
             maxValue = main.SudokuGame.GetMaxValue();
-            squareHeight = main.SudokuGame.MyGrid.SquareHeight;
-            squareWidth = main.SudokuGame.MyGrid.SquareWidth;
-            myCells = main.SudokuGame.MyGrid.MyCells;
-            solution = main.SudokuGame.Solution;
-            squaresPerColumn = main.SudokuGame.SquaresPerColumn;
-            squaresPerRow = main.SudokuGame.SquaresPerRow;
-            gridCSVString = main.SudokuGame.GridCSVString;
+
+            solution = main.SudokuGame.GetSolution();
+            squaresPerColumn = main.SudokuGame.GetSquaresPerColumn();
+            squaresPerRow = main.SudokuGame.GetSquaresPerRow();
+            gridCSVString = main.SudokuGame.GetGridCSVString();
+            squareHeight = main.SudokuGame.GetSquareHeight();
+            squareWidth = main.SudokuGame.GetSquareWidth();
+            myCells = main.SudokuGame.GetCells();
             moveCount = main.MoveCount;
             timeSpan = main.TimeSpan;
             endTime = DateTime.Now;
